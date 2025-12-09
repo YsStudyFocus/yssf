@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>University Requirements - YS Study Focus</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1, h2 {
+      margin: 0;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 15px;
+      overflow-x: auto;
+    }
+    .search-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .search-container input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    .note {
+      background: #fff8e1;
+      border-left: 4px solid #ffeb3b;
+      padding: 10px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    tr.highlight {
+      background-color: #ffff99 !important;
+    }
+    .university-row {
+      background-color: #e6e6e6;
+      font-weight: bold;
+    }
+    .program-col {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    .requirement-heading {
+      background-color: #d9edf7;
+      text-align: left;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>UNIVERSITY REQUIREMENTS</h1>
+  <h2>FOR INTERNATIONAL STUDENTS - 2025</h2>
+</header>
+
+<div class="container">
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search university or requirement..." onkeyup="filterRequirements()" />
+  </div>
+
+  <table>
+    <tr>
+      <th rowspan="2">No</th>
+      <th rowspan="2">University</th>
+      <th colspan="4">English Language Proficiency</th>
+      <th colspan="4">Academic Result</th>
+      <th rowspan="2">Study Gap</th>
+    </tr>
+    <tr>
+      <th class="program-col">PTE</th>
+      <th class="program-col">IELTS</th>
+      <th class="program-col">TOEFL</th>
+      <th class="program-col">Duolingo</th>
+      <th class="program-col">SSC</th>
+      <th class="program-col">HSC</th>
+      <th class="program-col">Bachelor</th>
+      <th class="program-col">Master's</th>
+    </tr>
+
+    <!-- City University -->
+    <tr>
+      <td rowspan="5">1</td>
+      <td class="university-row" colspan="10">City University</td>
+    </tr>
+    <tr>
+      <td>Foundation</td><td>36</td><td>-</td><td>500</td><td>85</td><td>GPA 3.00</td><td>GPA 3.25</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Diploma</td><td>40</td><td>4.0</td><td>550</td><td>95</td><td>GPA 3.00</td><td>GPA 3.25</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Bachelor</td><td>50</td><td>5.0</td><td>600</td><td>105</td><td>GPA 3.00</td><td>GPA 3.25</td><td>CGPA 2.5</td><td>–</td><td>2.5 years</td>
+    </tr>
+    <tr>
+      <td>PhD</td><td>55</td><td>6.0</td><td>650</td><td>115</td><td>–</td><td>–</td><td>CGPA 3.0</td><td>CGPA 3.0</td><td>5 years</td>
+    </tr>
+
+    <!-- IUKL -->
+    <tr>
+      <td rowspan="5">2</td>
+      <td class="university-row" colspan="10">Infrastructure University (IUKL)</td>
+    </tr>
+    <tr>
+      <td>Foundation</td><td>30</td><td>-</td><td>450</td><td>80</td><td>GPA 3.25</td><td>GPA 3.50</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Diploma</td><td>35</td><td>4.0</td><td>500</td><td>90</td><td>GPA 3.25</td><td>GPA 3.50</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Bachelor</td><td>45</td><td>5.0</td><td>600</td><td>105</td><td>GPA 3.25</td><td>GPA 3.50</td><td>CGPA 2.75</td><td>–</td><td>2.5 years</td>
+    </tr>
+    <tr>
+      <td>PhD</td><td>55</td><td>6.0</td><td>650</td><td>115</td><td>–</td><td>–</td><td>CGPA 3.0</td><td>CGPA 3.0</td><td>5 years</td>
+    </tr>
+
+    <!-- King's University -->
+    <tr>
+      <td rowspan="5">3</td>
+      <td class="university-row" colspan="10">King's University</td>
+    </tr>
+    <tr>
+      <td>Foundation</td><td>36</td><td>-</td><td>500</td><td>85</td><td>GPA 2.50</td><td>GPA 3.00</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Diploma</td><td>42</td><td>4.0</td><td>550</td><td>95</td><td>GPA 2.50</td><td>GPA 3.00</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Bachelor</td><td>50</td><td>5.0</td><td>650</td><td>115</td><td>GPA 2.50</td><td>GPA 3.00</td><td>CGPA 2.75</td><td>–</td><td>2.5 years</td>
+    </tr>
+    <tr>
+      <td>PhD</td><td>60</td><td>6.0</td><td>700</td><td>125</td><td>–</td><td>–</td><td>CGPA 3.0</td><td>CGPA 3.0</td><td>5 years</td>
+    </tr>
+
+    <!-- Alfa University -->
+    <tr>
+      <td rowspan="5">4</td>
+      <td class="university-row" colspan="10">Alfa University</td>
+    </tr>
+    <tr>
+      <td>Foundation</td><td>30</td><td>-</td><td>450</td><td>80</td><td>GPA 2.80</td><td>GPA 3.20</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Diploma</td><td>35</td><td>4.0</td><td>500</td><td>90</td><td>GPA 2.80</td><td>GPA 3.20</td><td>–</td><td>–</td><td>2 years</td>
+    </tr>
+    <tr>
+      <td>Bachelor</td><td>45</td><td>5.0</td><td>600</td><td>105</td><td>GPA 2.80</td><td>GPA 3.20</td><td>CGPA 2.5</td><td>–</td><td>2.5 years</td>
+    </tr>
+    <tr>
+      <td>PhD</td><td>55</td><td>6.0</td><td>650</td><td>115</td><td>–</td><td>–</td><td>CGPA 2.75</td><td>CGPA 2.75</td><td>5 years</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <strong>*Note:</strong> English Language Proficiency certificates can be submitted after the student arrives in Malaysia and before take intake.<br>
+    Requirements may vary by specific program. Contact our YS advisors for details.
+  </div>
+</div>
+
+<script>
+  function filterRequirements() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("table tr");
+    let foundAny = false;
+
+    for (let i = 2; i < rows.length; i++) {
+      const row = rows[i];
+      const text = row.textContent.toLowerCase();
+      if (text.includes(input)) {
+        row.style.display = "";
+        row.classList.add("highlight");
+        foundAny = true;
+      } else {
+        row.style.display = "none";
+        row.classList.remove("highlight");
+      }
+    }
+
+    if (input.trim() === "") {
+      rows.forEach(row => {
+        row.style.display = "";
+        row.classList.remove("highlight");
+      });
+    }
+  }
+  
+</script>
+
+</body>
+</html>

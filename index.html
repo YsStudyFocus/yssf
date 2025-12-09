@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YS Study Focus</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      background-color: #000;
+      color: yellow;
+      overflow: hidden;
+    }
+    .menu-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+      z-index: 1001;
+    }
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1000;
+    }
+    .nav-menu a {
+      display: block;
+      color: white;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    header img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .text-overlay {
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      width: 90%;
+      z-index: 1;
+      color: white;
+    }
+    .text-overlay h3 {
+      font-size: 18px;
+    }
+    .text-overlay h1 {
+      font-size: 26px;
+      margin: 10px 0;
+    }
+    .start-btn {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .about-section {
+      display: flex;
+      padding: 40px;
+      background-color: #fff;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      flex: 1;
+      padding-right: 20px;
+    }
+    .about-text h2 {
+      margin-bottom: 10px;
+    }
+    .collage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .collage-preview {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .collage-preview img {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .collage-preview img.middle {
+      transform: translateY(10px);
+      z-index: 1;
+    }
+
+    .programmes-bar {
+      background-color: #eee;
+      padding: 20px;
+      text-align: center;
+    }
+    .uni-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 400px;
+      margin: 10px auto 0;
+    }
+    .uni-grid div {
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      background-color: #004080;
+      color: white;
+      padding: 40px 20px;
+    }
+    .footer-container {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-logo {
+      flex: 1 1 100%;
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      width: 150px;
+      max-width: 100%;
+    }
+    .office {
+      flex: 1 1 45%;
+      text-align: left;
+    }
+    .office.right {
+      text-align: right;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+    }
+    @media (max-width: 768px) {
+      .office {
+        flex: 1 1 100%;
+        text-align: center !important;
+        margin-bottom: 20px;
+      }
+    }
+    .search-section {
+  background-color: #f0f8ff; /* light blue to stand out from About Us */
+  padding: 30px;
+  text-align: center;
+}
+
+.search-section h2 {
+  margin-bottom: 15px;
+}
+
+.search-box {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-bar {
+  padding: 10px 15px;
+  width: 250px;
+  max-width: 80%;
+  border: 2px solid #007BFF;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+}
+#searchResults p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+#searchResults button {
+  padding: 5px 12px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#searchResults button:hover {
+  background-color: #0056b3;
+}
+.uni-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns */
+  grid-template-rows: repeat(2, auto);   /* 2 rows */
+  gap: 10px;
+  max-width: 1000px;
+  margin: 10px auto 0;
+}
+
+.uni-grid div {
+  background-color: #fff;      /* old white box */
+  padding: 10px;               /* old padding */
+  border: 1px solid #ccc;      /* old border style */
+  text-align: center;
+  font-weight: normal;          /* keep old text style */
+  border-radius: 0;             /* no rounded corners, like old design */
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="nav-menu" id="navMenu">
+      <a href="#">Home</a>
+      <a href="#about">About Us</a>
+      <a href="university-requirements.html">Learn Requirements</a>
+      <a href="#contact">Contact Us</a>
+    </div>
+    <img src="yscover.png" alt="YS Cover">
+    <div class="text-overlay">
+      <h3>STUDENT GATEWAY TO MALAYSIA</h3>
+      <h1>YS STUDY FOCUS, THE BEST AND THE MOST TRUSTED PLACE TO START YOUR PROCESSING FOR MALAYSIA</h1>
+      <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">START YOUR PROCESSING</a>
+    </div>
+  </header>
+
+  <section class="about-section" id="about">
+    <div class="about-text">
+      <h2>ABOUT US</h2>
+      <p><strong>YS Study Focus</strong> is a trusted and officially authorized student placement agency, <strong>recognized by top Malaysian universities</strong>. Since our founding in 2024, we’ve become a reliable name for international student services — built on transparency, care, and results.</p>
+      <p>We proudly maintain <strong>official partnerships with 13 leading universities</strong> and have successfully processed over <strong>240 student applications</strong>. Our students have gained admission to prestigious institutions including:
+      <br><em>City University, BAC Education Group, Alfa University, UCMI, UPM, King’s University, Asia e University, INTI International University, SEGi University</em>, and many more.</p>
+      <p>Today, <strong>our team of 8 dedicated agents</strong> is actively guiding students from start to finish — ensuring a smooth transition into Malaysian universities. From choosing the right program to visa and document support, <strong>YS Study Focus is with you every step of the way</strong>.</p>
+      <p><em>Our mission is simple:</em> to open doors for students through quality education, genuine guidance, and dependable support.</p>
+    </div>
+    <div class="collage-preview" id="collagePreview">
+      <img src="inti.jpeg" alt="INTI University">
+      <img src="cityu.jpg" class="middle" alt="City University">
+      <img src="iukl.jpg" alt="IUKL">
+    </div>
+  </section>
+
+<!-- UNIVERSAL SUBJECT SEARCH -->
+<section class="search-section">
+  <h2>Search subject name here to find university</h2>
+  <div class="search-box">
+    <input type="text" id="subjectInput" placeholder="Type subject name..." class="search-bar" oninput="searchUniversities()">
+    <button onclick="searchUniversities()">Search</button>
+  </div>
+  <div id="searchResults"></div>
+</section>
+
+
+
+<section class="programmes-bar" id="requirements">
+
+    <h2>University Programmes and Tuition Fees</h2>
+
+<div class="uni-grid">
+  <div id="city-university">
+    <a href="city-university.html" style="text-decoration:none; color:inherit;">City University</a>
+  </div>
+
+  <div id="iukl">
+    <a href="iukl-fees.html" style="text-decoration:none; color:inherit;">IUKL</a>
+  </div>
+
+  <div id="bac">
+    <a href="bac-university.html" style="text-decoration:none; color:inherit;">BAC</a>
+  </div>
+
+  <div id="alfa-university">
+    <a href="alfa-university.html" style="text-decoration:none; color:inherit;">Alfa University</a>
+  </div>
+
+  <div id="university-of-cyberjaya">
+    <a href="university-of-cyberjaya.html" style="text-decoration:none; color:inherit;">University of Cyberjaya</a>
+  </div>
+
+  <div id="inti">
+    <a href="inti-university.html" style="text-decoration:none; color:inherit;">INTI</a>
+  </div>
+
+  <div id="segi">
+    <a href="segi-university.html" style="text-decoration:none; color:inherit;">SEGi</a>
+  </div>
+
+  <div id="genovasi">
+    <a href="genovasi-university.html" style="text-decoration:none; color:inherit;">Genovasi</a>
+  </div>
+
+  <div id="cybernetix">
+    <a href="cybernetix-university.html" style="text-decoration:none; color:inherit;">Cybernetix</a>
+  </div>
+
+  <div id="ucmi">
+    <a href="ucmi-university.html" style="text-decoration:none; color:inherit;">UCMI</a>
+  </div>
+</div>
+
+
+
+
+  </section>
+
+  <footer id="contact">
+   <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="ys_logo.png" alt="YS Logo">
+      </div>
+      <div class="office left">
+        <p><strong>Bangladesh Office</strong><br>
+        Aot# A5, House: 16<br>
+        Road: 2/3, Block L<br>
+        Bonani, Chairman Bari, Dhanmondi 1213</p>
+      </div>
+      <div class="office right">
+        <p><strong>Malaysia Office</strong><br>
+        De Tropicana,<br>
+        52, Jalan Kuchai Maju 13<br>
+        Kuchai Entrepreneurs Park<br>
+        58200 Kuala Lumpur, Malaysia</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="font-size: 16px; margin-top: 20px;">
+        WhatsApp: +60 11-3966 0706
+      </p>
+      <p style="margin-top: 10px;">
+        Facebook: <a href="https://www.facebook.com/people/YS-Study-Focus/61571694410231/#" target="_blank" style="color: #4ea1f3; text-decoration: none;">YS Study Focus</a>
+      </p>
+    </div>
+  </footer>
+
+  <div class="developer-bar" style="background-color: #002040; color: #ccc; padding: 5px 0; text-align: center; font-size: 12px; width: 100vw; margin-left: calc(50% - 50vw);">
+    Developed by: Bhuiyan Mohamed Nahid Jahan.
+  </div>
+  </footer>
+
+  <script>
+// UNIVERSAL SUBJECT SEARCH DATA (UPDATED)
+  const uniLinks = {
+    "City University Malaysia": "city-university.html",
+    "Infrastructure University Kuala Lumpur (IUKL)": "iukl-fees.html",
+    "BAC EDUCATION GROUP": "bac-university.html",
+    "ALFA UNIVERSITY MALAYSIA": "alfa-university.html",
+    "INTI International University": "inti-university.html",
+    "UNIVERSITY OF CYBERJAYA": "university-of-cyberjaya.html",
+    "University College MAIWP International (UCMI)": "ucmi-university.html",
+    "CYBERNETICS MALAYSIA (KTAC)": "cybernetix-university.html",
+    "GENOVASI UNIVERSITY MALAYSIA": "genovasi-university.html",
+    "SEGI UNIVERSITY MALAYSIA": "segi-university.html"
+  };
+
+  const programmeMap = {
+    "science": [
+      { uni: "City University Malaysia", program: "Foundation in Science" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Foundation in Science" },
+      { uni: "University College MAIWP International (UCMI)", program: "Foundation in Science" },
+      { uni: "INTI International University", program: "Foundation in Science" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Foundation in Science (Medicine/Pharmacy) (FIS)" },
+      { uni: "University College MAIWP International (UCMI)", program: "Bachelor of Biomedical Science (Honours)" }
+    ],
+    "business": [
+      { uni: "City University Malaysia", program: "Foundation in Business" },
+      { uni: "City University Malaysia", program: "Diploma in Business Management" },
+      { uni: "City University Malaysia", program: "Bachelor of Business Admin (Hons)" },
+      { uni: "City University Malaysia", program: "Bachelor of Business & Management (Hons)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Diploma in Business Administration" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "BBA / BBA in Marketing / HRM (Hons)" },
+      { uni: "BAC EDUCATION GROUP", campus: "BAC COLLEGE", program: "Foundation in Business" },
+      { uni: "BAC EDUCATION GROUP", campus: "RELIANCE COLLEGE", program: "Diploma in Business Management" },
+      { uni: "BAC EDUCATION GROUP", campus: "VERITAS UNIVERSITY", program: "Bachelor in Business Administration (Hons)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Foundation in Business" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "BA (HONOURS) Business Administration" },
+      { uni: "University College MAIWP International (UCMI)", program: "Diploma Business Management" },
+      { uni: "University College MAIWP International (UCMI)", program: "Bachelor of Business Administration (Honours)" },
+      { uni: "CYBERNETICS MALAYSIA (KTAC)", program: "Certificate of Business Management" },
+      { uni: "CYBERNETICS MALAYSIA (KTAC)", program: "Diploma in Business Management" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Diploma in Business Management" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Bachelor of Business Administration" },
+      { uni: "INTI International University", program: "Foundation in Business" },
+      { uni: "INTI International University", program: "Diploma in Business" },
+      { uni: "INTI International University", program: "Bachelor of Business (Hons)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Bachelor of Business Administration (Hons) (BBA)" }
+    ],
+    "it": [
+      { uni: "City University Malaysia", program: "Foundation in Information Technology" },
+      { uni: "City University Malaysia", program: "Diploma in Information Technology" },
+      { uni: "City University Malaysia", program: "Bachelor of Information Technology (Hons)" },
+      { uni: "City University Malaysia", program: "Master of Information Technology (MIT)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Master in Information Technology" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Diploma in Information Technology (Cybersecurity)" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Bachelor of Computer Science (Data Science)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Diploma in Information Technology" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Bachelor of Information Technology (HONOURS)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Bachelor in Computer Science (Cyber Security & Networks) (HONOURS)" },
+      { uni: "CYBERNETICS MALAYSIA (KTAC)", program: "Diploma in Computer Science" },
+      { uni: "INTI International University", program: "Foundation in Information Technology" },
+      { uni: "INTI International University", program: "Diploma in Information Technology" },
+      { uni: "INTI International University", program: "Bachelor of Computer Science (Hons)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Foundation in Information Technology (FIIT)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Bachelor of Technology (Hons) in Business Information System (BT-BIS)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Master of Information Technology (MIT)" }
+    ],
+    "accounting": [
+      { uni: "City University Malaysia", program: "Diploma in Accounting" },
+      { uni: "City University Malaysia", program: "Bachelor of Accounting (Hons)" },
+      { uni: "City University Malaysia", program: "Bachelor of Accounting & Finance (Hons)" },
+      { uni: "City University Malaysia", program: "Master of Accounting (MACE)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Diploma in Accounting" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Bachelor of Accountancy (Hons)" },
+      { uni: "BAC EDUCATION GROUP", campus: "VERITAS UNIVERSITY", program: "BA (Hons) Accounting & Finance" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Diploma in Accountancy" },
+      { uni: "CYBERNETICS MALAYSIA (KTAC)", program: "Diploma in Accounting" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Diploma in Accounting" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "BSc (Hons) Accounting and Finance" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Bachelor of Accounting (Hons) (BACC)" }
+    ],
+    "engineering": [
+      { uni: "City University Malaysia", program: "Diploma in Civil Engineering" },
+      { uni: "City University Malaysia", program: "Bachelor of Civil Engineering (Hons)" },
+      { uni: "City University Malaysia", program: "Bachelor of Electrical & Electronic Engineering (Hons)" },
+      { uni: "City University Malaysia", program: "Master of Mechanical Engineering (MME)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Diploma in Electrical & Electronics Engineering" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Bachelor of Civil Engineering (Hons)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Master in Electronics Engineering (By Research)" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Foundation in Computing & Engineering" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Bachelor of Computer Engineering (Honours)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Master of Philosophy in Engineering" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Doctor of Philosophy in Engineering" },
+      { uni: "INTI International University", program: "Diploma in Mechanical Engineering" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Bachelor of Biomedical Engineering (Hons) (BBME)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Doctor of Philosophy (PhD) Engineering" }
+    ],
+    "communication": [
+      { uni: "City University Malaysia", program: "Foundation in Arts (Communication)" },
+      { uni: "City University Malaysia", program: "Diploma in Mass Communication" },
+      { uni: "City University Malaysia", program: "Bachelor of Mass Communication (Hons)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Diploma in Corporate Communication" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Bachelor of Mass Communication (Hons)" },
+      { uni: "BAC EDUCATION GROUP", campus: "IACT COLLEGE", program: "Diploma in Mass Communication" },
+      { uni: "BAC EDUCATION GROUP", campus: "IACT COLLEGE", program: "BA Hons in Media Culture and Communication - University of Sunderland (3+0)" },
+      { uni: "BAC EDUCATION GROUP", campus: "VERITAS UNIVERSITY", program: "Bachelor of Communication (Hons) Branding & Digital Marketing" }
+    ],
+    "education": [
+      { uni: "City University Malaysia", program: "Diploma in Early Childhood Education" },
+      { uni: "City University Malaysia", program: "Bachelor of Education (Early Childhood Education) Honours" },
+      { uni: "City University Malaysia", program: "Master of Education (MED)" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Master of Education" },
+      { uni: "BAC EDUCATION GROUP", campus: "VERITAS UNIVERSITY", program: "Diploma in Early Childhood Education" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Bachelor of Early Childhood Education (HONOURS)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Master of Education" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Doctor of Education (DE)" },
+      { uni: "University College MAIWP International (UCMI)", program: "Diploma Early Childhood Education" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Master of Education" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Doctor of Philosophy in Education" }
+    ],
+    "law": [
+      { uni: "BAC EDUCATION GROUP", campus: "BAC COLLEGE", program: "Foundation in Law" },
+      { uni: "BAC EDUCATION GROUP", campus: "BAC COLLEGE", program: "LLB (3+0) University of London International Programmes" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Diploma in Law Enforcement" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Bachelor of Law Enforcement" }
+    ],
+    "media": [
+      { uni: "BAC EDUCATION GROUP", campus: "IACT COLLEGE", program: "Foundation in Media Studies" },
+      { uni: "BAC EDUCATION GROUP", campus: "IACT COLLEGE", program: "BA Hons in Social Media Management - University of Sunderland (3+0)" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Diploma in Interactive & Digital Media" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Bachelor of Arts in Media Technology" }
+    ],
+    "design": [
+      { uni: "City University Malaysia", program: "Diploma in Graphic Design" },
+      { uni: "City University Malaysia", program: "Bachelor of Graphic Design (Hons)" },
+      { uni: "City University Malaysia", program: "Diploma in Interior Design" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Foundation in Arts & Design" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Bachelor of Arts (HONOURS) Graphic Design" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Master of Art & Design (By Research)" },
+      { uni: "INTI International University", program: "Diploma in Graphic Design" }
+    ],
+    "health": [
+      { uni: "City University Malaysia", program: "Diploma in Occupational Safety & Health" },
+      { uni: "City University Malaysia", program: "Bachelor of Occupational Safety & Health (Hons)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Diploma in Health Care Management" },
+      { uni: "University College MAIWP International (UCMI)", program: "Diploma in Environment Health" },
+      { uni: "University College MAIWP International (UCMI)", program: "Master of Health Science (Research Mode)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Foundation in Occupational Safety and Health (FIOSH)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Bachelor of Occupational Safety and Health (BOSH)" }
+    ],
+    "nursing": [
+      { uni: "City University Malaysia", program: "Diploma in Nursing" },
+      { uni: "City University Malaysia", program: "Bachelor of Nursing (Hons)" },
+      { uni: "University College MAIWP International (UCMI)", program: "Diploma Nursing Science" },
+      { uni: "University College MAIWP International (UCMI)", program: "Master of Nursing (Research Mode)" }
+    ],
+    "pharmacy": [
+      { uni: "University College MAIWP International (UCMI)", program: "Diploma in Pharmacy" },
+      { uni: "University College MAIWP International (UCMI)", program: "Bachelor of Pharmacy (Honours)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Diploma in Pharmacy" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Bachelor of Pharmacy (Hons) (BPharm)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Master of Clinical Pharmacy (MCP)" }
+    ],
+    "hotel": [
+      { uni: "City University Malaysia", program: "Diploma in Hotel Management" },
+      { uni: "City University Malaysia", program: "Bachelor of Hotel Management (Hons)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Diploma in Hotel Management (WBL)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Bachelor of Science (HONOURS) in Hospitality Management" },
+      { uni: "CYBERNETICS MALAYSIA (KTAC)", program: "Diploma in Hotel Management" },
+      { uni: "BAC EDUCATION GROUP", campus: "RELIANCE COLLEGE", program: "Diploma in Hotel Management" }
+    ],
+    "master": [
+      { uni: "City University Malaysia", program: "Master of Business Administration (MBA)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "Master of Business Administration (MBA)" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Master of Business Administration (MBA) (By coursework)" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Master of Business Administration" },
+      { uni: "University College MAIWP International (UCMI)", program: "Master of Business Administration (MBA)" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Master of Business Administration" },
+      { uni: "INTI International University", program: "Master of Business Administration (MBA)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Master of Business Administration (MBA)" }
+    ],
+    "phd": [
+      { uni: "City University Malaysia", program: "Doctor of Business Administration (DBA)" },
+      { uni: "Infrastructure University Kuala Lumpur (IUKL)", program: "PhD in Business Administration" },
+      { uni: "BAC EDUCATION GROUP", campus: "UNIMY", program: "Doctor of Philosophy in Education" },
+      { uni: "ALFA UNIVERSITY MALAYSIA", program: "Doctor of Philosophy in Business Administration (PhDBA)" },
+      { uni: "University College MAIWP International (UCMI)", program: "Doctor of Philosophy in Nursing (Research Mode)" },
+      { uni: "GENOVASI UNIVERSITY MALAYSIA", program: "Doctor of Philosophy in Business" },
+      { uni: "INTI International University", program: "Doctor of Philosophy (PhD)" },
+      { uni: "UNIVERSITY OF CYBERJAYA", program: "Doctor of Business Administration (DBA)" }
+    ]
+  };
+  
+  function searchUniversities() {
+    const input = document.getElementById("subjectInput").value.toLowerCase().trim();
+    const resultBox = document.getElementById("searchResults");
+    resultBox.innerHTML = "";
+  
+    if (!input) {
+      resultBox.innerHTML = "<p>Please enter a subject name.</p>";
+      return;
+    }
+  
+    let foundResults = [];
+    const searchTerms = input.split(' ').filter(term => term.length > 2);
+    
+    // Iterate through the comprehensive map
+    for (const key in programmeMap) {
+      if (key.includes(input)) {
+        programmeMap[key].forEach(match => {
+          foundResults.push(match);
+        });
+        continue;
+      }
+      
+      programmeMap[key].forEach(match => {
+        const programNameLower = match.program.toLowerCase();
+        const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
+        
+        if (allTermsMatch) {
+          foundResults.push(match);
+        }
+      });
+    }
+
+    // Remove duplicates
+    const uniqueResults = [];
+    const seen = new Set();
+    foundResults.forEach(item => {
+      const identifier = item.uni + item.program + (item.campus || '');
+      if (!seen.has(identifier)) {
+        uniqueResults.push(item);
+        seen.add(identifier);
+      }
+    });
+  
+    if (uniqueResults.length > 0) {
+      uniqueResults.forEach(match => {
+        const universityName = match.uni;
+        const programName = match.program;
+        const campusName = match.campus ? ` (${match.campus})` : '';
+        const link = uniLinks[universityName];
+        
+        // --- THIS IS THE CRITICAL CHANGE ---
+        const encodedProgram = encodeURIComponent(programName);
+
+        const linkButton = link 
+          ? `<button onclick="window.location.href='${link}?q=${encodedProgram}';">Go to Fees</button>` 
+          : `<button disabled>Page coming soon</button>`;
+        // ---------------------------------
+          
+        resultBox.innerHTML += `
+  <p>
+    ${universityName}${campusName} offers ${programName} ${linkButton}
+  </p>
+`;
+      });
+    } else {
+      resultBox.innerHTML = "<p>No university program found matching your search term.</p>";
+    }
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById('navMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
+
+
+</body>
+</html>

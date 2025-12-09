@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>University College MAIWP International (UCMI) – International Fee Structure 2025</title>
+  <style>
+    body {
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0 0 80px 0; /* space for footer */
+  background: #f9f9f9;
+}
+
+    /* --- FINAL FIX FOR FULL-WIDTH HEADER AND FOOTER --- */
+    header {
+  background: #004080;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100vw; /* Force width to 100% of viewport width */
+  margin-left: calc(50% - 50vw); /* Compensate for potential body centering */
+}
+footer {
+  background: #004080;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100vw; /* Force width to 100% of viewport width */
+  margin-left: calc(50% - 50vw); /* Compensate for potential body centering */
+  margin-top: auto;
+}
+/* --- END FINAL FIX --- */
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* Important: Prevents horizontal scrollbar from 100vw trick */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
+    h1, h2 {
+      margin: 0;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    .accordion {
+      background-color: #0066cc;
+      color: white;
+      cursor: pointer;
+      padding: 16px;
+      margin-bottom: 10px;
+      border: none;
+      outline: none;
+      text-align: left;
+      font-size: 18px;
+      transition: 0.4s;
+      border-radius: 5px;
+    }
+    .active, .accordion:hover {
+      background-color: #005bb5;
+    }
+    .panel {
+      padding: 0 15px;
+      background-color: white;
+      display: none;
+      overflow: hidden;
+      border-left: 5px solid #005bb5;
+      margin-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .note {
+      background: #fff8e1;
+      border-left: 4px solid #ffeb3b;
+      padding: 10px;
+      margin: 15px 0;
+    }
+    .divider {
+      border-top: 2px solid #ccc;
+      margin: 20px 0;
+    }
+    .search-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .search-container input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    tr.highlight {
+      background-color: #ffff99 !important;
+    }
+    .download-icon {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.download-icon:hover {
+  opacity: 0.8;
+}
+.download-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 15px;
+  padding: 5px 10px;
+  background: #e6f0ff;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  width: fit-content;
+  float: right;
+}
+
+.download-bar span {
+  margin-right: 5px;
+  font-weight: bold;
+  color: #004080;
+}
+
+.download-bar:hover {
+  background: #ffefe1;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>University College MAIWP International (UCMI) MALAYSIA</h1>
+  <h2>International Fee Structure 2025</h2>
+  <p>Valid from 1st January 2025 until 31st December 2025</p>
+</header>
+
+<div class="container">
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search program name..." onkeyup="filterPrograms()" />
+  </div>
+
+<!-- FOUNDATION -->
+<button class="accordion">FOUNDATION PROGRAMS</button>
+<div class="panel">
+  <table>
+    <tr>
+      <th>No</th><th>Programme</th><th>Duration</th><th>Tuition Fees (Promo)</th><th>Resource Fee/Sem</th><th>Total</th>
+    </tr>
+    <tr><td>F1</td><td>Foundation in Science</td><td>1 Year</td><td>RM11,800</td><td>RM500</td><td>RM12,300</td></tr>
+    <tr><td>F2</td><td>Foundation in Business</td><td>1 Year</td><td>RM11,800</td><td>RM500</td><td>RM12,300</td></tr>
+  </table>
+  <div class="note">
+    <div class="download-bar" onclick="downloadPDF('foundation')">
+      <span>Download PDF</span><span>⬇️</span>
+    </div>
+    <strong>Misc Fees:</strong><br>
+    Visa (EMGS) & Application Processing Fee: RM2,200<br>
+    Registration/Admin/Student Fee: RM4,000<br>
+    <strong>Total Misc: RM6,200</strong><br><br>
+    <strong>Payment Schedule:</strong><br>
+    1st: RM2,200 (Visa & App Fee)<br>
+    2nd: Tuition + RM4,000 + Resource Fee<br>
+    Assessment Fee: RM25/subject
+  </div>
+</div>
+
+<!-- DIPLOMA -->
+<button class="accordion">DIPLOMA PROGRAMS</button>
+<div class="panel">
+  <table>
+    <tr>
+      <th>No</th><th>Programme</th><th>Duration</th><th>Year 1</th><th>Resource Fee/Sem</th><th>Year 2</th><th>Year 3</th><th>Total</th>
+    </tr>
+    <tr><td>D1</td><td>Diploma in Medical Science</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D2</td><td>Diploma in Physiotherapy</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D3</td><td>Diploma in Environment Health</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D4</td><td>Diploma Health & Medical Science</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D5</td><td>Diploma Occupational Therapy</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D6</td><td>Diploma in Occupational Safety & Health</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D7</td><td>Diploma Medical Laboratory Technology</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM15,650</td><td>RM15,650</td><td>RM43,250</td></tr>
+    <tr><td>D8</td><td>Diploma Nursing Science</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM22,800</td><td>RM22,800</td><td>RM57,500</td></tr>
+    <tr><td>D9</td><td>Diploma in Pharmacy</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM16,050</td><td>RM16,050</td><td>RM44,000</td></tr>
+    <tr><td>D10</td><td>Diploma Logistic Management</td><td>2.7 Years</td><td>RM11,800</td><td>RM500</td><td>RM6,450</td><td>RM6,450</td><td>RM24,800</td></tr>
+    <tr><td>D11</td><td>Diploma Human Resources Management</td><td>3 Years</td><td>RM11,800</td><td>RM500</td><td>RM6,450</td><td>RM6,450</td><td>RM24,800</td></tr>
+    <tr><td>D12</td><td>Diploma Business Management</td><td>2.6 Years</td><td>RM11,800</td><td>RM500</td><td>RM6,450</td><td>RM6,450</td><td>RM24,800</td></tr>
+    <tr><td>D13</td><td>Diploma Early Childhood Education</td><td>2.7 Years</td><td>RM11,800</td><td>RM500</td><td>RM6,450</td><td>RM6,450</td><td>RM24,800</td></tr>
+    <tr><td>D14</td><td>Diploma in Hotel Management</td><td>2.6 Years</td><td>RM11,800</td><td>RM500</td><td>RM6,450</td><td>RM6,450</td><td>RM24,800</td></tr>
+    <tr><td>D15</td><td>Diploma Psychology</td><td>2.7 Years</td><td>RM11,800</td><td>RM500</td><td>RM6,450</td><td>RM6,450</td><td>RM24,800</td></tr>
+  </table>
+  <div class="note">
+    <div class="download-bar" onclick="downloadPDF('diploma')">
+      <span>Download PDF</span><span>⬇️</span>
+    </div>
+    <strong>Misc Fees:</strong><br>
+    Visa (EMGS) & Application Processing Fee: RM2,200<br>
+    Registration/Admin/Student Fee: RM4,000<br>
+    <strong>Total Misc: RM6,200</strong><br><br>
+    <strong>Payment Schedule:</strong><br>
+    1st: RM2,200 (Visa & App Fee)<br>
+    2nd: Tuition + RM4,000 + Resource Fee<br>
+    Assessment Fee: RM25/subject
+  </div>
+</div>
+
+<!-- DEGREE -->
+<button class="accordion">DEGREE PROGRAMS</button>
+<div class="panel">
+  <table>
+    <tr>
+      <th>No</th><th>Programme</th><th>Duration</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Total</th>
+    </tr>
+    <tr><td>UG1</td><td>Bachelor of Environmental Occupational Safety & Health (Honours)</td><td>4 Years</td><td>RM11,800</td><td>RM17,467</td><td>RM17,467</td><td>RM17,467</td><td>RM64,300</td></tr>
+    <tr><td>UG2</td><td>Bachelor of Biomedical Science (Honours)</td><td>4 Years</td><td>RM11,800</td><td>RM16,034</td><td>RM16,034</td><td>RM16,034</td><td>RM60,000</td></tr>
+    <tr><td>UG3</td><td>Bachelor of Nursing Science (Honours)</td><td>4 Years</td><td>RM11,800</td><td>RM20,640</td><td>RM20,640</td><td>RM20,640</td><td>RM73,820</td></tr>
+    <tr><td>UG4</td><td>Bachelor of Pharmacy (Honours)</td><td>4 Years</td><td>RM11,800</td><td>RM24,367</td><td>RM24,367</td><td>RM24,367</td><td>RM85,000</td></tr>
+    <tr><td>UG5</td><td>Bachelor of Science in Pharmaceutical Technology (Honours)</td><td>3.6 Years</td><td>RM11,800</td><td>RM13,984</td><td>RM13,984</td><td>RM13,984</td><td>RM53,850</td></tr>
+    <tr><td>UG6</td><td>Bachelor of International Supply Chain Management (Honours)</td><td>3.6 Years</td><td>RM11,800</td><td>RM11,167</td><td>RM11,167</td><td>RM11,167</td><td>RM45,400</td></tr>
+    <tr><td>UG7</td><td>Bachelor of Business Administration (Honours)</td><td>3.6 Years</td><td>RM11,800</td><td>RM12,500</td><td>RM12,500</td><td>RM12,500</td><td>RM49,400</td></tr>
+  </table>
+  <div class="note">
+    <div class="download-bar" onclick="downloadPDF('degree')">
+      <span>Download PDF</span><span>⬇️</span>
+    </div>
+    <strong>Misc Fees:</strong><br>
+    Visa (EMGS) & Application Processing Fee: RM2,200<br>
+    Registration/Admin/Student Fee: RM4,000<br>
+    <strong>Total Misc: RM6,200</strong><br><br>
+    <strong>Payment Schedule:</strong><br>
+    1st: RM2,200 (Visa & App Fee)<br>
+    2nd: Tuition + RM4,000 + Resource Fee<br>
+    Assessment Fee: RM25/subject
+  </div>
+</div>
+
+<!-- MASTER -->
+<button class="accordion">MASTER PROGRAMS</button>
+<div class="panel">
+  <table>
+    <tr>
+      <th>No</th><th>Programme</th><th>Duration</th><th>Year 1</th><th>Year 2</th><th>Total</th>
+    </tr>
+    <tr><td>M1</td><td>Master of Health Science (Research Mode)</td><td>2-4 Years</td><td>RM11,800</td><td>RM4,600</td><td>RM16,500</td></tr>
+    <tr><td>M2</td><td>Master of Nursing (Research Mode)</td><td>2-4 Years</td><td>RM11,800</td><td>RM4,600</td><td>RM16,500</td></tr>
+    <tr><td>M3</td><td>Master of Business Administration (MBA)</td><td>1-3 Years</td><td>RM11,800</td><td>RM11,600</td><td>RM23,500</td></tr>
+  </table>
+  <div class="note">
+    <div class="download-bar" onclick="downloadPDF('master')">
+      <span>Download PDF</span><span>⬇️</span>
+    </div>
+    <strong>Misc Fees:</strong><br>
+    Visa (EMGS) & Application Processing Fee: RM2,200<br>
+    Registration/Admin/Student Fee: RM4,000<br>
+    <strong>Total Misc: RM6,200</strong><br><br>
+    <strong>Payment Schedule:</strong><br>
+    1st: RM2,200 (Visa & App Fee)<br>
+    2nd: Tuition + RM4,000 + Resource Fee<br>
+    Assessment Fee: RM25/subject
+  </div>
+</div>
+
+<!-- PHD -->
+<button class="accordion">PHD PROGRAMS</button>
+<div class="panel">
+  <table>
+    <tr>
+      <th>No</th><th>Programme</th><th>Duration</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Total</th>
+    </tr>
+    <tr><td>P1</td><td>Doctor of Philosophy in Nursing (Research Mode)</td><td>3-4 Years</td><td>RM11,800</td><td>RM9,550</td><td>RM9,550</td><td>RM31,000</td></tr>
+    <tr><td>P2</td><td>Doctor of Philosophy in Science (Research Mode)</td><td>3-6 Years</td><td>RM11,800</td><td>RM9,550</td><td>RM9,550</td><td>RM31,000</td></tr>
+  </table>
+  <div class="note">
+    <div class="download-bar" onclick="downloadPDF('phd')">
+      <span>Download PDF</span><span>⬇️</span>
+    </div>
+    <strong>Misc Fees:</strong><br>
+    Visa (EMGS) & Application Processing Fee: RM2,200<br>
+    Registration/Admin/Student Fee: RM4,000<br>
+    <strong>Total Misc: RM6,200</strong><br><br>
+    <strong>Payment Schedule:</strong><br>
+    1st: RM2,200 (Visa & App Fee)<br>
+    2nd: Tuition + RM4,000 + Resource Fee<br>
+    Assessment Fee: RM25/subject
+  </div>
+</div>
+
+
+
+<footer>
+  <p>&copy; 2025 University College MAIWP International (UCMI) Malaysia.</p>
+</footer>
+
+<!-- JavaScript to handle accordion and search -->
+<script>
+  // Initialize accordions
+  const acc = document.querySelectorAll(".accordion");
+  acc.forEach(btn => {
+    btn.addEventListener("click", function() {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+  });
+
+  // Search function
+  function filterPrograms() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const tables = document.querySelectorAll("table");
+
+  tables.forEach(table => {
+    const rows = table.querySelectorAll("tr");
+    let foundInTable = false;
+
+    // Skip header row
+    for (let i = 1; i < rows.length; i++) {
+      const rowText = rows[i].textContent.toLowerCase();
+      if (rowText.includes(input)) {
+        rows[i].style.display = "";
+        rows[i].classList.add("highlight");
+        foundInTable = true;
+      } else {
+        rows[i].style.display = "none";
+        rows[i].classList.remove("highlight");
+      }
+    }
+
+    const panel = table.closest(".panel");
+    const accordion = panel.previousElementSibling;
+    const note = panel.querySelector(".note");
+
+    if (foundInTable) {
+      panel.style.display = "block";
+      accordion.classList.add("active");
+      if (note) note.style.display = "block"; // show note
+    } else {
+      panel.style.display = "none";
+      accordion.classList.remove("active");
+      if (note) note.style.display = "none"; // hide note
+    }
+  });
+}
+
+function downloadPDF(programKey) {
+  const key = "ucmi_pdf_download_time_" + programKey;
+  const lastDownload = localStorage.getItem(key);
+  const now = new Date().getTime();
+
+  if (lastDownload) {
+    const confirmDownload = confirm("You already downloaded this Fees Structure. Download again?");
+    if (!confirmDownload) return; // user clicked NO
+  }
+
+  // Store timestamp
+  localStorage.setItem(key, now);
+
+  // Trigger file download
+  const link = document.createElement("a");
+  link.href = "https://github.com/yourusername/yourrepo/ucmi-fees-2025.pdf"; // replace with actual link
+  link.download = "UCMI_Fee_Structure_2025.pdf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// Function to get query parameter from URL
+  function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  // Auto-run search on page load if query parameter exists
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchTerm = getQueryParam('q');
+    if (searchTerm) {
+      const searchInput = document.getElementById('searchInput');
+      // Decode and set the search input value
+      searchInput.value = decodeURIComponent(searchTerm); 
+      
+      // Manually trigger the filter function
+      filterPrograms();
+      
+      // Optional: scroll the page to the search input area
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+</script>
+
+</body>
+</html>
