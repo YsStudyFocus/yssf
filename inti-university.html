@@ -327,6 +327,27 @@ function downloadPDF(programKey) {
   const lastDownload = localStorage.getItem(key);
   const now = new Date().getTime();
 
+  // --- Dynamic Link Setup ---
+  let pdfFilename = "";
+  let downloadName = "";
+
+  if (programKey === 'inti-penang') {
+    pdfFilename = "inti-penang-fees-2025.pdf";
+    downloadName = "INTI_Penang_Fee_Structure_2025.pdf";
+  } else if (programKey === 'inti-nilai') {
+    pdfFilename = "inti-nilai-fees-2025.pdf";
+    downloadName = "INTI_Nilai_Fee_Structure_2025.pdf";
+  } else if (programKey === 'inti-subang') {
+    pdfFilename = "inti-subang-fees-2025.pdf";
+    downloadName = "INTI_Subang_Fee_Structure_2025.pdf";
+  } else {
+    // Safety Fallback
+    alert("Error: Download file not found for this campus.");
+    return; 
+  }
+  // --- End Dynamic Link Setup ---
+
+
   if (lastDownload) {
     const confirmDownload = confirm("You already downloaded this Fees Structure. Download again?");
     if (!confirmDownload) return; // user clicked NO
@@ -335,10 +356,10 @@ function downloadPDF(programKey) {
   // Store timestamp
   localStorage.setItem(key, now);
 
-  // Trigger file download
+  // Trigger file download using the dynamic variables
   const link = document.createElement("a");
-  link.href = "https://github.com/yourusername/yourrepo/intiu-fees-2025.pdf"; // replace with actual link
-  link.download = "inti_Fee_Structure_2025.pdf";
+  link.href = pdfFilename;
+  link.download = downloadName;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
