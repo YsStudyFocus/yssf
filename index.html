@@ -163,43 +163,70 @@
     footer {
       background-color: #004080;
       color: white;
-      padding: 40px 20px;
+      padding: 30px 20px 10px 20px; /* Slimmer footer */
     }
     .footer-container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      text-align: center;
+      gap: 20px;
     }
     .footer-logo {
-      flex: 1 1 100%;
-      margin-bottom: 20px;
+      order: 2; /* Logo in the middle */
+      flex: 0 0 auto;
+      text-align: center;
     }
     .footer-logo img {
-      width: 150px;
-      max-width: 100%;
+      width: 130px; 
+      height: auto;
     }
     .office {
-      flex: 1 1 45%;
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .office.left {
+      order: 1;
       text-align: left;
     }
     .office.right {
+      order: 3;
       text-align: right;
     }
     .footer-bottom {
-      text-align: center;
-      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+      min-height: 80px; 
+    }
+    /* SLIM DEVELOPER BAR */
+    .developer-bar {
+      background-color: #001a33; 
+      color: #888; 
+      padding: 5px 0; /* Very slim */
+      text-align: center; 
+      font-size: 11px; 
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
     @media (max-width: 768px) {
-      .office {
-        flex: 1 1 100%;
-        text-align: center !important;
-        margin-bottom: 20px;
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .office.left, .office.right {
+        text-align: center;
+        order: 3;
+      }
+      .footer-logo {
+        order: 1;
+        margin-bottom: 15px;
       }
     }
+    
     .search-section {
   background-color: #f0f8ff; /* light blue to stand out from About Us */
   padding: 30px;
@@ -861,46 +888,46 @@
   </div>
 </section>
 
-  <footer id="contact">
-  <div class="footer-container">
-    <div class="footer-logo">
-      <img src="ys_logo.png" alt="YS Logo">
-    </div>
-    <div class="office left">
-      <p><strong>Bangladesh Office</strong><br>
-      Aot# A5, House: 16<br>
-      Road: 2/3, Block L<br>
-      Bonani, Chairman Bari, Dhanmondi 1213</p>
-    </div>
-    <div class="office right">
-      <p><strong>Malaysia Office</strong><br>
-      De Tropicana,<br>
-      52, Jalan Kuchai Maju 13<br>
-      Kuchai Entrepreneurs Park<br>
-      58200 Kuala Lumpur, Malaysia</p>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="menu">
-      <div class="toggle">
-        <ion-icon name="share-social"></ion-icon>
+<footer id="contact">
+    <div class="footer-container">
+      <div class="office left">
+        <p><strong>Bangladesh Office</strong><br>
+        Aot# A5, House: 16, Road: 2/3, Block L<br>
+        Bonani, Chairman Bari, Dhanmondi 1213</p>
       </div>
-      <li style="--i: 0; --clr: #1877f2">
-        <a href="https://web.facebook.com/people/YS-Study-Focus/61571694410231/?_rdc=1&_rdr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      </li>
-      <li style="--i: 2; --clr: #25d366">
-        <a href="https://wa.me/601139660706" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      </li>
-      <li style="--i: 4; --clr: #ff0000">
-        <a href="https://youtube.com/@sabrina367sabu?si=GRfgbwVUAxxH5Ke_" target="_blank"><i class="fab fa-youtube"></i></a>
-      </li>
-      <li style="--i: 6; --clr: #000000">
-        <a href="https://www.tiktok.com/@sabu_555?_r=1&_t=ZS-92OvdlsEIcy" target="_blank"><i class="fab fa-tiktok"></i></a>
-      </li>
+
+      <div class="footer-logo">
+        <img src="ys_logo.png" alt="YS Logo">
+      </div>
+
+      <div class="office right">
+        <p><strong>Malaysia Office</strong><br>
+        De Tropicana, 52, Jalan Kuchai Maju 13<br>
+        Kuchai Entrepreneurs Park<br>
+        58200 Kuala Lumpur, Malaysia</p>
+      </div>
     </div>
-  </div>
-</footer>
+
+    <div class="footer-bottom">
+      <div class="menu">
+        <div class="toggle">
+          <ion-icon name="share-social"></ion-icon>
+        </div>
+        <li style="--i: 0; --clr: #1877f2">
+          <a href="https://web.facebook.com/people/YS-Study-Focus/61571694410231/?_rdc=1&_rdr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </li>
+        <li style="--i: 2; --clr: #25d366">
+          <a href="https://wa.me/601139660706" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </li>
+        <li style="--i: 4; --clr: #ff0000">
+          <a href="https://youtube.com/@sabrina367sabu?si=GRfgbwVUAxxH5Ke_" target="_blank"><i class="fab fa-youtube"></i></a>
+        </li>
+        <li style="--i: 6; --clr: #000000">
+          <a href="https://www.tiktok.com/@sabu_555?_r=1&_t=ZS-92OvdlsEIcy" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </li>
+      </div>
+    </div>
+  </footer>
 
 <div class="developer-bar" style="background-color: #002040; color: #ccc; padding: 10px 0; text-align: center; font-size: 12px; width: 100%;">
   Developed by: Bhuiyan Mohamed Nahid Jahan.
