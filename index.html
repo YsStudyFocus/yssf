@@ -22,15 +22,33 @@
       color: yellow;
       overflow: hidden;
     }
-    .menu-icon {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 30px;
-      cursor: pointer;
-      color: white;
-      z-index: 1001;
-    }
+    /* Container for top right icons */
+.top-right-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px; 
+  z-index: 1001;
+  align-items: center;
+}
+
+/* Style for both the Search and Menu icons */
+.action-icon {
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.action-icon:hover {
+  color: #FFD700; /* Golden hover effect */
+}
+
+/* We remove absolute position from the old menu-icon so it stays inside the flex container */
+.menu-icon {
+  position: static !important;
+}
     .nav-menu {
       display: none;
       position: absolute;
@@ -252,43 +270,512 @@
   border-radius: 0;             /* no rounded corners, like old design */
 }
 
+/* Creative Square Card Design */
+.about-section {
+  padding: 40px 0 !important; /* Reduces vertical empty space */
+  background-color: #f8f8f8; /* Matches your body background */
+}
 
+.stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px; /* Space between the squares */
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: white;
+  padding: 30px 20px;
+  width: 280px; /* Fixed square-ish width */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+  border-bottom: 5px solid #004080; /* Branding accent */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Creativity: Hover Animation */
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,64,128,0.15);
+}
+
+.stat-icon-circle {
+  width: 70px;
+  height: 70px;
+  background-color: #004080;
+  border-radius: 18px; /* Slightly rounded square icon */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px;
+  color: yellow; /* High contrast from your brand colors */
+  font-size: 28px;
+  animation: pulse-blue 2s infinite; /* Continuous subtle animation */
+}
+
+@keyframes pulse-blue {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 64, 128, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 64, 128, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 64, 128, 0); }
+}
+
+.stat-card h2 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stat-card p b {
+  display: block;
+  font-size: 16px;
+  color: #000;
+}
+
+.stat-subtext {
+  font-size: 10px !important; /* Smaller text */
+  font-style: italic;
+  color: #999;
+  margin-top: 8px;
+}
+/* --- THE GOLDEN SNAKE EFFECT --- */
+
+/* 1. This class makes the middle card act as a container for the light */
+.middle-card {
+  position: relative;
+  overflow: hidden; /* This "clips" the light so it only shows at the edge */
+  border-bottom: none !important; /* Removes the static blue line to let the gold shine */
+  z-index: 1;
+}
+
+/* 2. The Golden Light (The Snake) */
+.middle-card::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  /* A conic gradient creates the single "head" of the snake */
+  background: conic-gradient(transparent, transparent, transparent, #FFD700); 
+  left: -25%;
+  top: -25%;
+  animation: rotate-snake 4s linear infinite;
+  z-index: -2;
+}
+
+/* 3. The Inner Cover (Keeps the card white inside) */
+.middle-card::after {
+  content: '';
+  position: absolute;
+  inset: 4px; /* Adjust this (e.g., 2px or 5px) to change the snake's thickness */
+  background: white;
+  border-radius: 16px; /* Matches your card's 20px radius minus the 4px inset */
+  z-index: -1;
+}
+
+/* 4. Animation: 360 to 0 makes it travel Anti-Clockwise */
+@keyframes rotate-snake {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Styling for the new Header Section */
+.about-header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.about-header h2 {
+  color: #004080; /* Your Brand Blue */
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.about-header p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #444;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Ensure the about section centers everything vertically */
+.about-section {
+  display: flex;
+  flex-direction: column; /* Stacks header over cards */
+  align-items: center;
+  padding: 60px 0 !important;
+  background-color: #f8f8f8;
+}
+
+/* Container for top right icons */
+.top-right-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px; /* Space between search and menu icon */
+  z-index: 1001;
+  align-items: center;
+}
+
+/* Container for top right icons */
+.top-right-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px; 
+  z-index: 1001;
+  align-items: center;
+}
+
+/* Matching button style for both icons */
+.action-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px; /* Uniform size for both icons */
+  cursor: pointer;
+  color: white;
+  background: rgba(255, 255, 255, 0.1); /* Subtle background circle */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.action-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #FFD700; /* Golden hover */
+  transform: scale(1.1);
+}
+
+/* Ensure menu-icon behaves as a child of the flex container */
+.menu-icon {
+  position: static !important;
+}
+
+/* Update the existing menu-icon to remove its absolute positioning */
+.menu-icon {
+  position: static; /* Overriding previous absolute position */
+}
+
+/* Tight, clean footer bar by default */
+.footer-bottom {
+  position: relative;
+  padding: 20px 0; /* Minimal space when closed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: padding 0.5s ease; /* Smooth expansion */
+}
+
+/* When the menu is active, increase padding to fit the icons */
+.footer-bottom:has(.menu.active) {
+  padding: 100px 0; 
+}
+
+.menu {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.menu .toggle {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 1.25s;
+  z-index: 5;
+}
+
+/* Standard animation logic */
+.menu.active .toggle { transform: rotate(315deg); }
+
+.menu li {
+  position: absolute;
+  list-style: none;
+  transition: 0.5s;
+  transform: rotate(calc(360deg / 8 * var(--i))) translateX(0px);
+  scale: 0;
+  opacity: 0;
+}
+
+.menu.active li {
+  transform: rotate(calc(360deg / 8 * var(--i))) translateX(-95px); 
+  scale: 1;
+  opacity: 1;
+}
+
+.menu li a {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: var(--clr);
+  box-shadow: 0 3px 4px rgba(0,0,0,0.15);
+  transition: 0.5s;
+  transform: rotate(calc(360deg / -8 * var(--i))); 
+}
+
+/* --- NEW CONTACT SECTION STYLES --- */
+.contact-cta-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10%;
+  background-color: #ffffff;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.contact-left {
+  flex: 1.2;
+  min-width: 320px;
+}
+
+.contact-left h2 {
+  font-size: 48px;
+  color: #004080;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+/* --- UPDATED WHATSAPP BUTTON WITH ANIMATIONS --- */
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #25d366;
+  color: white !important;
+  padding: 18px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+  
+  /* Applying the continuous pulse animation */
+  animation: pulse-green 2s infinite, wiggle 5s infinite;
+}
+
+/* 1. The Pulse Effect (Glowing outer ring) */
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* 2. The Wiggle Effect (Subtle shake every 5 seconds) */
+@keyframes wiggle {
+  0%, 90%, 100% { transform: rotate(0); }
+  92% { transform: rotate(3deg); }
+  94% { transform: rotate(-3deg); }
+  96% { transform: rotate(2deg); }
+  98% { transform: rotate(-2deg); }
+}
+
+/* 3. The Shimmer (White light passing through the button) */
+.whatsapp-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: rotate(30deg);
+  transition: none;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -60%; }
+  20% { left: 120%; }
+  100% { left: 120%; }
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe57;
+  transform: translateY(-5px) scale(1.05); /* Lifts up and grows slightly */
+  animation: none; /* Stop pulsing when user is hovering */
+  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+}
+
+.contact-right {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+}
+
+.photo-collage {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.collage-img {
+  width: 130px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.collage-img.tall {
+  height: 240px;
+  border: 4px solid #fff;
+}
+
+.collage-img:hover {
+  transform: scale(1.1) rotate(2deg);
+  z-index: 5;
+}
+
+@media (max-width: 768px) {
+  .contact-cta-section {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .contact-right {
+    order: -1; 
+    margin-bottom: 30px;
+  }
+}
+
+/* --- PAPER PLANE & FIREWORK STYLES --- */
+#flight-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows clicking through to the button */
+  z-index: 100;
+}
+
+.paper-plane {
+  position: absolute;
+  color: #004080; /* Match your brand blue */
+  font-size: 24px;
+  offset-path: path("M 250,80 C 300,200 150,250 200,300 C 400,450 800,200 1100,100"); /* The "Smooth" line */
+  animation: fly 4s infinite linear;
+  opacity: 0;
+}
+
+@keyframes fly {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* Firework Particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 101;
+}
 
   </style>
 </head>
 <body>
 
   <header>
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-    <div class="nav-menu" id="navMenu">
-      <a href="#">Home</a>
-      <a href="#about">About Us</a>
-      <a href="university-requirements.html">Learn Requirements</a>
-      <a href="#contact">Contact Us</a>
+  <div class="top-right-actions">
+    <div class="action-icon" onclick="scrollToSearch()" title="Search">
+      <i class="fas fa-search"></i>
     </div>
-    <img src="yscover.png" alt="YS Cover">
-    <div class="text-overlay">
-      <h3>STUDENT GATEWAY TO MALAYSIA</h3>
-      <h1>YS STUDY FOCUS, THE BEST AND THE MOST TRUSTED PLACE TO START YOUR PROCESSING FOR MALAYSIA</h1>
-      <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">START YOUR PROCESSING</a>
+    
+    <div class="action-icon menu-icon" onclick="toggleMenu()" title="Menu">
+      <i class="fas fa-bars"></i>
     </div>
-  </header>
+  </div>
 
-  <section class="about-section" id="about">
-    <div class="about-text">
-      <h2>ABOUT US</h2>
-      <p><strong>YS Study Focus</strong> is a trusted and officially authorized student placement agency, <strong>recognized by top Malaysian universities</strong>. Since our founding in 2024, we’ve become a reliable name for international student services — built on transparency, care, and results.</p>
-      <p>We proudly maintain <strong>official partnerships with 13 leading universities</strong> and have successfully processed over <strong>240 student applications</strong>. Our students have gained admission to prestigious institutions including:
-      <br><em>City University, BAC Education Group, Alfa University, UCMI, UPM, King’s University, Asia e University, INTI International University, SEGi University</em>, and many more.</p>
-      <p>Today, <strong>our team of 8 dedicated agents</strong> is actively guiding students from start to finish — ensuring a smooth transition into Malaysian universities. From choosing the right program to visa and document support, <strong>YS Study Focus is with you every step of the way</strong>.</p>
-      <p><em>Our mission is simple:</em> to open doors for students through quality education, genuine guidance, and dependable support.</p>
+  <div class="nav-menu" id="navMenu">
+    <a href="#">Home</a>
+    <a href="#about">About Us</a>
+    <a href="university-requirements.html">Learn Requirements</a>
+    <a href="#contact">Contact Us</a>
+  </div>
+  
+  <img src="yscover.png" alt="YS Cover">
+  <div class="text-overlay">
+    <h3>STUDENT GATEWAY TO MALAYSIA</h3>
+    <h1>YS STUDY FOCUS, THE BEST AND THE MOST TRUSTED PLACE TO START YOUR PROCESSING FOR MALAYSIA</h1>
+    <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">START YOUR PROCESSING</a>
+  </div>
+</header>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+<section class="about-section" id="about">
+  <div class="about-header">
+    <h2>Top Reasons to Choose YSSF</h2>
+    <p>
+      YS Study Focus provides expert, reliable guidance and direct university partnerships, 
+      ensuring a seamless transition and successful admission process for Bangladeshi students 
+      to study in Malaysia.
+    </p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon-circle"><i class="fas fa-university"></i></div>
+      <h2>13+</h2>
+      <p><b>Official University Partnerships</b></p>
     </div>
-    <div class="collage-preview" id="collagePreview">
-      <img src="inti.jpeg" alt="INTI University">
-      <img src="cityu.jpg" class="middle" alt="City University">
-      <img src="iukl.jpg" alt="IUKL">
+
+    <div class="stat-card middle-card">
+      <div class="stat-icon-circle"><i class="fas fa-user-graduate"></i></div>
+      <h2 id="dynamicStudentCount">68</h2>
+      <p><b>Successful Student Admissions</b></p>
+      <p class="stat-subtext">*Updated weekly based on processing</p>
     </div>
-  </section>
+
+    <div class="stat-card">
+      <div class="stat-icon-circle"><i class="fas fa-user-tie"></i></div>
+      <h2>8</h2>
+      <p><b>Dedicated Expert Agents</b></p>
+    </div>
+  </div>
+</section>
 
 <!-- UNIVERSAL SUBJECT SEARCH -->
 <section class="search-section">
@@ -348,44 +835,76 @@
   </div>
 </div>
 
-
-
-
   </section>
+<section class="contact-cta-section" style="position: relative;">
+  <div id="flight-path">
+     <div class="paper-plane" id="plane"><i class="fas fa-paper-plane"></i></div>
+  </div>
+
+  <div class="contact-left">
+    <h2>Contact <span id="plane-origin">Us</span> Today!</h2>
+    <p style="margin-bottom: 30px; color: #444; font-size: 19px; line-height: 1.5;">
+      Start your journey to Malaysia with expert guidance. <br>
+      Message us now for a free consultation!
+    </p>
+    <a href="https://wa.me/601139660706" target="_blank" class="whatsapp-btn">
+      <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+    </a>
+  </div>
+
+  <div class="contact-right">
+    <div class="photo-collage" id="collage-end">
+      <img src="cityu.jpg" alt="City University" class="collage-img">
+      <img src="inti.jpeg" alt="Inti University" class="collage-img tall">
+      <img src="iukl.jpg" alt="IUKL" class="collage-img">
+    </div>
+  </div>
+</section>
 
   <footer id="contact">
-   <footer id="contact">
-    <div class="footer-container">
-      <div class="footer-logo">
-        <img src="ys_logo.png" alt="YS Logo">
-      </div>
-      <div class="office left">
-        <p><strong>Bangladesh Office</strong><br>
-        Aot# A5, House: 16<br>
-        Road: 2/3, Block L<br>
-        Bonani, Chairman Bari, Dhanmondi 1213</p>
-      </div>
-      <div class="office right">
-        <p><strong>Malaysia Office</strong><br>
-        De Tropicana,<br>
-        52, Jalan Kuchai Maju 13<br>
-        Kuchai Entrepreneurs Park<br>
-        58200 Kuala Lumpur, Malaysia</p>
-      </div>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img src="ys_logo.png" alt="YS Logo">
     </div>
-    <div class="footer-bottom">
-      <p style="font-size: 16px; margin-top: 20px;">
-        WhatsApp: +60 11-3966 0706
-      </p>
-      <p style="margin-top: 10px;">
-        Facebook: <a href="https://www.facebook.com/people/YS-Study-Focus/61571694410231/#" target="_blank" style="color: #4ea1f3; text-decoration: none;">YS Study Focus</a>
-      </p>
+    <div class="office left">
+      <p><strong>Bangladesh Office</strong><br>
+      Aot# A5, House: 16<br>
+      Road: 2/3, Block L<br>
+      Bonani, Chairman Bari, Dhanmondi 1213</p>
     </div>
-  </footer>
-
-  <div class="developer-bar" style="background-color: #002040; color: #ccc; padding: 5px 0; text-align: center; font-size: 12px; width: 100vw; margin-left: calc(50% - 50vw);">
-    Developed by: Bhuiyan Mohamed Nahid Jahan.
+    <div class="office right">
+      <p><strong>Malaysia Office</strong><br>
+      De Tropicana,<br>
+      52, Jalan Kuchai Maju 13<br>
+      Kuchai Entrepreneurs Park<br>
+      58200 Kuala Lumpur, Malaysia</p>
+    </div>
   </div>
+
+  <div class="footer-bottom">
+    <div class="menu">
+      <div class="toggle">
+        <ion-icon name="share-social"></ion-icon>
+      </div>
+      <li style="--i: 0; --clr: #1877f2">
+        <a href="https://web.facebook.com/people/YS-Study-Focus/61571694410231/?_rdc=1&_rdr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      </li>
+      <li style="--i: 2; --clr: #25d366">
+        <a href="https://wa.me/601139660706" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </li>
+      <li style="--i: 4; --clr: #ff0000">
+        <a href="https://youtube.com/@sabrina367sabu?si=GRfgbwVUAxxH5Ke_" target="_blank"><i class="fab fa-youtube"></i></a>
+      </li>
+      <li style="--i: 6; --clr: #000000">
+        <a href="https://www.tiktok.com/@sabu_555?_r=1&_t=ZS-92OvdlsEIcy" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </li>
+    </div>
+  </div>
+</footer>
+
+<div class="developer-bar" style="background-color: #002040; color: #ccc; padding: 10px 0; text-align: center; font-size: 12px; width: 100%;">
+  Developed by: Bhuiyan Mohamed Nahid Jahan.
+</div>
   </footer>
 
  <script>
@@ -492,7 +1011,97 @@
 
   // Run the fetch function on page load
   document.addEventListener('DOMContentLoaded', fetchAllPrograms);
+  function updateStudentCount() {
+  // 1. Set the date you want the count to start from (Year, Month index 0-11, Day)
+  // Example: Dec 21, 2025
+  const startDate = new Date(2025, 11, 21); 
+  const today = new Date();
+  
+  // 2. Calculate the difference in milliseconds
+  const diffInMs = today - startDate;
+  
+  // 3. Convert milliseconds to weeks (1000ms * 60s * 60m * 24h * 7d)
+  const weeksPassed = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7));
+  
+  // 4. Starting number (68) + weeks passed
+  const currentCount = 68 + (weeksPassed > 0 ? weeksPassed : 0);
+  
+  // 5. Update the HTML element
+  const countElement = document.getElementById("dynamicStudentCount");
+  if (countElement) {
+    countElement.innerText = currentCount + "+";
+  }
+}
+
+// Run the function when the page loads
+document.addEventListener('DOMContentLoaded', updateStudentCount);
+
+function scrollToSearch() {
+  const searchSection = document.querySelector(".search-section");
+  if (searchSection) {
+    searchSection.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function createFirework() {
+  const container = document.querySelector('.contact-cta-section');
+  const collage = document.getElementById('collage-end');
+  const rect = collage.getBoundingClientRect();
+  const sectionRect = container.getBoundingClientRect();
+
+  // Firework colors: Yellow, Blue, Red, White (Malaysia Flag)
+  const colors = ['#FFCC00', '#003399', '#CC0000', '#FFFFFF'];
+
+  // Position at the end of the 3rd photo
+  const originX = rect.right - sectionRect.left;
+  const originY = rect.top - sectionRect.top + 50;
+
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    particle.style.backgroundColor = color;
+    particle.style.left = originX + 'px';
+    particle.style.top = originY + 'px';
+    particle.style.boxShadow = `0 0 10px ${color}`;
+    
+    container.appendChild(particle);
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 6 + 2;
+    const destinationX = Math.cos(angle) * 120;
+    const destinationY = Math.sin(angle) * 120;
+
+    const animation = particle.animate([
+      { transform: 'translate(0, 0)', opacity: 1 },
+      { transform: `translate(${destinationX}px, ${destinationY}px)`, opacity: 0 }
+    ], {
+      duration: 1000 + Math.random() * 500,
+      easing: 'cubic-bezier(0, .9, .57, 1)'
+    });
+
+    animation.onfinish = () => particle.remove();
+  }
+}
+
+// Trigger fireworks every 4 seconds (matches the plane animation)
+setInterval(createFirework, 4000);
+
+</script>
+<script>
+  const menu = document.querySelector(".menu");
+  const toggle = document.querySelector(".toggle");
+  if(toggle) {
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("active");
+    });
+  }
+
+
 </script>
 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
