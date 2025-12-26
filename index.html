@@ -12,9 +12,11 @@
       font-family: Arial, sans-serif;
     }
     body {
-      background-color: #f8f8f8;
-      color: #333;
-    }
+  background-color: #f8f8f8;
+  color: #333;
+  overflow-x: hidden; /* Add this to prevent horizontal scrolling */
+  width: 100%;        /* Ensure it stays locked to viewport width */
+}
     header {
       position: relative;
       height: 100vh;
@@ -281,20 +283,24 @@
 }
 .uni-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns */
-  grid-template-rows: repeat(2, auto);   /* 2 rows */
-  gap: 10px;
+  /* Automatically adjusts columns based on screen size */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+  gap: 12px;
   max-width: 1000px;
-  margin: 10px auto 0;
+  margin: 20px auto;
+  padding: 0 15px; /* Adds breathing room on mobile */
 }
 
 .uni-grid div {
-  background-color: #fff;      /* old white box */
-  padding: 10px;               /* old padding */
-  border: 1px solid #ccc;      /* old border style */
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
   text-align: center;
-  font-weight: normal;          /* keep old text style */
-  border-radius: 0;             /* no rounded corners, like old design */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  transition: transform 0.2s;
 }
 
 /* Creative Square Card Design */
@@ -571,7 +577,6 @@
   transform: rotate(calc(360deg / -8 * var(--i))); 
 }
 
-/* --- NEW CONTACT SECTION STYLES --- */
 .contact-cta-section {
   display: flex;
   align-items: center;
@@ -580,6 +585,8 @@
   background-color: #ffffff;
   gap: 50px;
   flex-wrap: wrap;
+  overflow: hidden; /* Add this to "clip" the plane and fireworks */
+  position: relative;
 }
 
 .contact-left {
@@ -737,6 +744,23 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 101;
+}
+
+@media (max-width: 600px) {
+  .text-overlay h1 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .contact-left h2 {
+    font-size: 32px;
+  }
+  .stat-card {
+    width: 90%; /* Stack cards nicely on mobile */
+    margin: 10px auto;
+  }
+  header {
+    height: 80vh; /* Shorter header on mobile for better focus */
+  }
 }
 
   </style>
@@ -1072,18 +1096,16 @@ function scrollToSearch() {
 
 function createFirework() {
   const container = document.querySelector('.contact-cta-section');
-  const collage = document.getElementById('collage-end');
-  const rect = collage.getBoundingClientRect();
-  const sectionRect = container.getBoundingClientRect();
+  if(!container) return;
 
-  // Firework colors: Yellow, Blue, Red, White (Malaysia Flag)
+  // Firework colors
   const colors = ['#FFCC00', '#003399', '#CC0000', '#FFFFFF'];
 
-  // Position at the end of the 3rd photo
-  const originX = rect.right - sectionRect.left;
-  const originY = rect.top - sectionRect.top + 50;
+  // Center the firework inside the section regardless of screen size
+  const originX = container.offsetWidth / 2;
+  const originY = container.offsetHeight / 2;
 
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 20; i++) { // Reduced count for mobile performance
     const particle = document.createElement('div');
     particle.className = 'particle';
     const color = colors[Math.floor(Math.random() * colors.length)];
@@ -1091,24 +1113,21 @@ function createFirework() {
     particle.style.backgroundColor = color;
     particle.style.left = originX + 'px';
     particle.style.top = originY + 'px';
-    particle.style.boxShadow = `0 0 10px ${color}`;
     
     container.appendChild(particle);
 
     const angle = Math.random() * Math.PI * 2;
-    const velocity = Math.random() * 6 + 2;
-    const destinationX = Math.cos(angle) * 120;
-    const destinationY = Math.sin(angle) * 120;
+    const velocity = Math.random() * 4 + 2;
+    const destX = Math.cos(angle) * 80;
+    const destY = Math.sin(angle) * 80;
 
-    const animation = particle.animate([
+    particle.animate([
       { transform: 'translate(0, 0)', opacity: 1 },
-      { transform: `translate(${destinationX}px, ${destinationY}px)`, opacity: 0 }
+      { transform: `translate(${destX}px, ${destY}px)`, opacity: 0 }
     ], {
-      duration: 1000 + Math.random() * 500,
-      easing: 'cubic-bezier(0, .9, .57, 1)'
-    });
-
-    animation.onfinish = () => particle.remove();
+      duration: 800,
+      easing: 'ease-out'
+    }).onfinish = () => particle.remove();
   }
 }
 
