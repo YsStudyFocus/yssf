@@ -628,11 +628,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 80px 10%;
+  padding: 20px 10%; /* Reduced from 80px to match the section above */
   background-color: #ffffff;
   gap: 50px;
   flex-wrap: wrap;
-  overflow: hidden; /* Add this to "clip" the plane and fireworks */
+  overflow: hidden; 
   position: relative;
 }
 
@@ -827,6 +827,96 @@
     padding: 10px 5px;
   }
 }
+.testimonials-section {
+  padding: 20px 0; /* Reduced from 60px */
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  color: #004080;
+  margin-bottom: 10px; /* Reduced from 40px */
+  font-weight: bold;
+}
+
+.section-title span {
+  color: #007BFF;
+  border-bottom: 3px solid #FFD700;
+}
+
+/* Slider Container */
+.testimonial-slider {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding: 20px;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Hide scrollbar for Chrome/Safari/Firefox */
+  -ms-overflow-style: none;
+}
+
+.testimonial-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-card {
+    min-width: 350px;
+    max-width: 350px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 0; /* No internal padding */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    border: none; /* Borders removed */
+    overflow: hidden; /* Keeps the image corners rounded */
+    transition: all 0.4s ease;
+}
+
+  .photo-review-container {
+    width: 100%;
+    height: 250px; /* Fixed height for the review image */
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+
+  .photo-review-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the whole review image is visible */
+    background: #fff;
+  }
+
+  .student-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #f1f1f1;
+  }
+
+  .student-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #007BFF;
+  }
+
+  .student-details h4 {
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .student-details p {
+    font-size: 12px;
+    margin: 0;
+    color: #666;
+  }
 
   </style>
 </head>
@@ -952,6 +1042,101 @@
 </div>
 
   </section>
+
+ <section class="testimonials-section">
+  <h2 class="section-title">Student <span>Success Stories</span></h2>
+  
+  <div class="testimonial-slider" id="testimonialSlider">
+    
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review1.jpg" alt="Student Review">
+      </div>
+      
+      <div class="student-info">
+        <img src="student_profile1.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>Maruf Rahman</h4>
+          <p>UTM Space <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review2.jpg" alt="Student Review">
+      </div>
+      <div class="student-info">
+        <img src="student_profile2.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>Meem Chowdhory</h4>
+          <p>King's University <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review3.jpg" alt="Student Review">
+      </div>
+      <div class="student-info">
+        <img src="student_profile3.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>Adlina Halder</h4>
+          <p>Alfa University College <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review4.jpg" alt="Student Review">
+      </div>
+      <div class="student-info">
+        <img src="student_profile4.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>lamiya ahmed asmi</h4>
+          <p>Genovasi University Colege <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review5.jpg" alt="Student Review">
+      </div>
+      <div class="student-info">
+        <img src="student_profile5.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>Ismamzaman Shuptoo</h4>
+          <p>UCMI <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review6.jpg" alt="Student Review">
+      </div>
+      <div class="student-info">
+        <img src="student_profile6.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>Govenda Sarkar </h4>
+          <p>Alfa University College <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="photo-review-container">
+        <img src="review7.jpg" alt="Student Review">
+      </div>
+      <div class="student-info">
+        <img src="student_profile7.jpg" alt="Profile" class="student-img">
+        <div class="student-details">
+          <h4>Shimanto Hasan </h4>
+          <p>UNIMY <img src="https://flagcdn.com/w20/my.png" class="flag-icon"></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section class="contact-cta-section" style="position: relative;">
   <div id="flight-path">
      <div class="paper-plane" id="plane"><i class="fas fa-paper-plane"></i></div>
@@ -1189,7 +1374,7 @@ function createFirework() {
     particle.animate([
       { transform: 'translate(0, 0)', opacity: 1 },
       { transform: `translate(${destX}px, ${destY}px)`, opacity: 0 }
-    ], {
+    ], { 
       duration: 800,
       easing: 'ease-out'
     }).onfinish = () => particle.remove();
@@ -1209,6 +1394,47 @@ setInterval(createFirework, 4000);
     });
   }
 
+function initTestimonialSlider() {
+  const slider = document.getElementById('testimonialSlider');
+  let isDown = false;
+  let scrollLeft;
+  let startX;
+
+  // 1. Auto-scroll functionality
+  let scrollAmount = 0;
+  const step = 1; // Speed of auto-scroll
+  
+  function autoPlay() {
+    if (!isDown) { // Only scroll if user isn't dragging
+      slider.scrollLeft += step;
+      if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth)) {
+        slider.scrollLeft = 0; // Reset to start
+      }
+    }
+    requestAnimationFrame(autoPlay);
+  }
+  
+  autoPlay();
+
+  // 2. Drag to scroll (for desktop mouse users)
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave', () => isDown = false);
+  slider.addEventListener('mouseup', () => isDown = false);
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// Call the function
+document.addEventListener('DOMContentLoaded', initTestimonialSlider);
 
 </script>
 
