@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partnership Hub | YS Study Focus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --brand-blue: #004080;
+      --brand-yellow: #FFD700;
+      --accent-mint: #00cba9;
+      --text-dark: #2d3436;
+      --glass: rgba(255, 255, 255, 0.9);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: #f0f2f5;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* --- ENHANCED HERO --- */
+    .hero {
+      background: linear-gradient(45deg, rgba(0, 64, 128, 0.95), rgba(0, 123, 255, 0.8)), url('yscover.png');
+      background-size: cover;
+      background-position: center;
+      padding: 120px 20px 180px;
+      text-align: center;
+      color: white;
+      clip-path: ellipse(150% 100% at 50% 0%);
+    }
+
+    .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
+
+    /* --- SEARCH BAR UPGRADE --- */
+    .search-container {
+      max-width: 600px;
+      margin: -40px auto 50px;
+      position: relative;
+      z-index: 10;
+      padding: 0 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 20px 30px;
+      border-radius: 50px;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      font-size: 1.1rem;
+      outline: none;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+    }
+
+    /* --- PARTNER GRID --- */
+    .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+    
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      margin-bottom: 100px;
+    }
+
+    .uni-card {
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: 0.4s;
+      position: relative;
+      border: 1px solid #eee;
+    }
+
+    .uni-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0,64,128,0.15);
+    }
+
+    /* Scholarship Pulse Badge */
+    .scholarship-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #e74c3c;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: bold;
+      z-index: 5;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+      100% { transform: scale(1); }
+    }
+
+    .img-box { height: 200px; overflow: hidden; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+    .card-body { padding: 30px; text-align: center; }
+    .card-body h3 { margin-bottom: 20px; color: var(--brand-blue); font-size: 1.4rem; }
+
+    .btn-wrap { display: flex; gap: 12px; }
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .btn-l { border: 2px solid var(--brand-blue); color: var(--brand-blue); }
+    .btn-l:hover { background: var(--brand-blue); color: white; }
+    .btn-f { background: var(--brand-blue); color: white; }
+
+    /* --- STEP-BY-STEP TIMELINE SECTION --- */
+    .timeline-section {
+      background: var(--brand-blue);
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+  
+
+    /* --- UPDATED INTERACTIVE TIMELINE STYLES --- */
+.timeline-section {
+  background: var(--brand-blue);
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.timeline-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.step-card {
+  background: rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  border-radius: 25px;
+  width: 280px; /* Fixed width for consistency */
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-card:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-5px);
+}
+
+/* The Active (Expanded) State */
+.step-card.active {
+  background: var(--brand-yellow);
+  color: var(--brand-blue);
+  width: 350px; /* Expands wider on desktop */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.step-card i {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.step-card.active i {
+  transform: scale(1.2);
+}
+
+.step-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+/* Hidden Content Logic */
+.step-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  text-align: left;
+  width: 100%;
+  margin-top: 0;
+}
+
+.step-card.active .step-details {
+  max-height: 300px; /* Allows enough room for the list */
+  opacity: 1;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 64, 128, 0.1);
+}
+
+.step-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.step-details ul li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.step-details ul li i {
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .step-card { width: 100%; } /* Stacks vertically on mobile */
+  .step-card.active { width: 100%; }
+}
+
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Our Global University Partners</h1>
+    <p>Direct Partnerships. Expert Guidance. Successful Futures.</p>
+  </header>
+
+  <div class="search-container">
+    <input type="text" id="uniSearch" class="search-input" placeholder="Search by University Name..." onkeyup="filterUnis()">
+  </div>
+
+  <div class="container">
+    <div class="partner-grid" id="partnerGrid">
+        </div>
+  </div>
+
+  <section class="timeline-section">
+  <h2 style="font-size: 2.5rem; font-weight: 800;">How Your Journey Starts</h2>
+  <p style="margin-bottom: 20px; opacity: 0.8;">Click on a step to see the requirements</p>
+  
+  <div class="timeline-container">
+    
+    <div class="step-card" onclick="toggleStep(this)">
+      <i class="fas fa-file-medical"></i>
+      <h3>Step 1</h3>
+      <p>Document Submission</p>
+      <div class="step-details">
+        <p><strong>Documents To Start:</strong></p><br>
+        <ul>
+          <li><i class="fas fa-check-circle"></i> A. All Certificates (SSC, HSC, etc.)</li>
+          <li><i class="fas fa-check-circle"></i> B. All Mark Sheets (SSC, HSC, etc.)</li>
+          <li><i class="fas fa-check-circle"></i> C. Passport (Full scanned copy)</li>
+          <li><i class="fas fa-check-circle"></i> D. Photo (White BG, 35x45mm)</li>
+        </ul>
+        <p style="margin-top:10px; font-size: 12px; font-style: italic;">*That is all you need to begin!</p>
+      </div>
+    </div>
+
+    <div class="step-card" onclick="toggleStep(this)">
+      <i class="fas fa-university"></i>
+      <h3>Step 2</h3>
+      <p>Offer Letter (OL)</p>
+      <div class="step-details">
+        <p><strong>The Application:</strong></p><br>
+        <p>We will officially apply to your chosen university. We will secure your Offer Letter for you within <strong>3-7 working days</strong>.</p>
+      </div>
+    </div>
+
+    <div class="step-card" onclick="toggleStep(this)">
+      <i class="fas fa-passport"></i>
+      <h3>Step 3</h3>
+      <p>Visa Processing</p>
+      <div class="step-details">
+        <p><strong>EVAL & Approval:</strong></p><br>
+        <p>EMGS will issue your EVAL (Electronic Visa Approval Letter). Once approved, we will handle your final Visa endorsement application.</p>
+      </div>
+    </div>
+
+    <div class="step-card" onclick="toggleStep(this)">
+      <i class="fas fa-plane-departure"></i>
+      <h3>Step 4</h3>
+      <p>The Flight</p>
+      <div class="step-details">
+        <p><strong>Dream Big:</strong></p><br>
+        <p>Pack your bags! It's time to fly to your dream destination in Malaysia with the full support of YS Study Focus.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <a href="https://wa.me/601139660706" class="fab-contact" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    const partners = [
+      { name: "City University Malaysia", img: "cityu_main.jpg", learn: "city-details.html", fees: "city-university.html", scholarship: true },
+      { name: "IUKL", img: "iukl_main.jpg", learn: "iukl-details.html", fees: "iukl-fees.html", scholarship: false },
+      { name: "BAC Education", img: "bac_main.jpg", learn: "bac-details.html", fees: "bac-university.html", scholarship: true },
+      { name: "Alfa University", img: "alfa_main.jpg", learn: "alfa-details.html", fees: "alfa-university.html", scholarship: false },
+      { name: "University of Cyberjaya", img: "cyberjaya_main.jpg", learn: "cyberjaya-details.html", fees: "university-of-cyberjaya.html", scholarship: false },
+      { name: "INTI International University", img: "inti_main.jpg", learn: "inti-details.html", fees: "inti-university.html", scholarship: true },
+      { name: "SEGi University", img: "segi.jpg", learn: "segi-details.html", fees: "segi-university.html", scholarship: false },
+      { name: "Genovasi University", img: "genovasi.jpg", learn: "genovasi-details.html", fees: "genovasi-university.html", scholarship: false },
+      { name: "Cybernetics (KTAC)", img: "cybernetics.jpg", learn: "cybernetics-details.html", fees: "cybernetics-university.html", scholarship: false },
+      { name: "UCMI University", img: "ucmi.jpg", learn: "ucmi-details.html", fees: "ucmi-university.html", scholarship: false },
+      { name: "Taylor's University", img: "taylors.jpg", learn: "taylors-details.html", fees: "taylors-university.html", scholarship: false },
+      { name: "Binary University", img: "binary.jpg", learn: "binary-details.html", fees: "binary-university.html", scholarship: true },
+      { name: "King's University", img: "kings.jpg", learn: "kings-details.html", fees: "kings-university.html", scholarship: false }
+    ];
+
+    function renderCards(data) {
+      const grid = document.getElementById('partnerGrid');
+      grid.innerHTML = '';
+      data.forEach(uni => {
+        grid.innerHTML += `
+          <div class="uni-card">
+            ${uni.scholarship ? '<div class="scholarship-badge">Up to 50% Scholarship</div>' : ''}
+            <div class="img-box">
+              <img src="${uni.img}" alt="${uni.name}">
+            </div>
+            <div class="card-body">
+              <h3>${uni.name}</h3>
+              <div class="btn-wrap">
+                <a href="${uni.learn}" class="btn btn-l">Learn More</a>
+                <a href="${uni.fees}" class="btn btn-f">Check Fees</a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filterUnis() {
+      const val = document.getElementById('uniSearch').value.toLowerCase();
+      const filtered = partners.filter(u => u.name.toLowerCase().includes(val));
+      renderCards(filtered);
+    }
+
+    window.onload = () => renderCards(partners);
+
+    function toggleStep(element) {
+  // First, check if the clicked element is already active
+  const isActive = element.classList.contains('active');
+  
+  // Close all other active steps
+  document.querySelectorAll('.step-card').forEach(card => {
+    card.classList.remove('active');
+  });
+
+  // If the clicked element wasn't active, open it
+  if (!isActive) {
+    element.classList.add('active');
+  }
+}
+
+  </script>
+</body>
+</html>
