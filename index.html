@@ -927,6 +927,127 @@
     color: #666;
   }
 
+  /* --- UNIVERSITY FLIP CARDS SECTION --- */
+.uni-flip-section {
+  padding: 60px 20px;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.uni-flip-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+
+/* The Flip Card Logic */
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 400px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner, 
+.flip-card.active .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Front Side Styling */
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.curved-blue-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #000055; /* Dark Blue from SS */
+  color: white;
+  padding: 25px 10px;
+  border-radius: 50% 50% 0 0 / 30px 30px 0 0; /* Creates the curve */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.curved-blue-bar i {
+  color: #40E0D0; /* Turquoise pin color */
+  font-size: 20px;
+}
+
+.curved-blue-bar span {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Back Side Styling */
+.flip-card-back {
+  background-color: #00cba9; /* Mint green color from your SS */
+  color: #000055;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.flip-card-back p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.study-btn {
+  background-color: #000055;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.study-btn:hover {
+  background-color: #007BFF;
+}
+
+@media (max-width: 600px) {
+  .flip-card { height: 350px; }
+}
+
   </style>
 </head>
 <body>
@@ -1145,6 +1266,112 @@
 
   </div>
 </section>
+
+
+<section class="uni-flip-section">
+  <h2 class="section-title">Choose your favourite <span>Study Destination</span></h2>
+  
+  <div class="uni-flip-container">
+    
+    <div class="flip-card" onclick="this.classList.toggle('active')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="cityu_main.jpg" alt="City University">
+          <div class="curved-blue-bar">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>City University</span>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>City University Malaysia is known for its industry-focused programs and vibrant campus life in the heart of Petaling Jaya and Cyber jaya.</p>
+          <a href="city-details.html" class="study-btn">Study in City University &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="this.classList.toggle('active')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="iukl_main.jpg" alt="IUKL">
+          <div class="curved-blue-bar">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>IUKL</span>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>Infrastructure University Kuala Lumpur (IUKL) excels in engineering and technology, producing highly skilled professionals.</p>
+          <a href="iukl-details.html" class="study-btn">Study in IUKL &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="this.classList.toggle('active')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="bac_main.jpg" alt="BAC">
+          <div class="curved-blue-bar">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>BAC Education</span>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>BAC Education Group is Malaysia's fastest-growing law and business school with international recognition. UNIMY is a part of BAC offering amazing progrrames</p>
+          <a href="bac-details.html" class="study-btn">Study in BAC &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="this.classList.toggle('active')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="alfa_main.jpg" alt="Alfa University">
+          <div class="curved-blue-bar">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Alfa University</span>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>Alfa University offers creative and technical programs designed to meet the demands of modern global industries.</p>
+          <a href="alfa-details.html" class="study-btn">Study in Alfa &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="this.classList.toggle('active')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="cyberjaya_main.jpg" alt="University of Cyberjaya">
+          <div class="curved-blue-bar">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Cyberjaya</span>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>A leading healthcare and science university providing world-class education in Malaysia's tech hub.</p>
+          <a href="cyberjaya-details.html" class="study-btn">Study in Cyberjaya &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card" onclick="this.classList.toggle('active')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="inti_main.jpg" alt="INTI">
+          <div class="curved-blue-bar">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>INTI University</span>
+          </div>
+        </div>
+        <div class="flip-card-back">
+          <p>INTI International University offers high-quality programs with global connections and excellent career outcomes.</p>
+          <a href="inti-details.html" class="study-btn">Study in INTI &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 <section class="contact-cta-section" style="position: relative;">
   <div id="flight-path">
