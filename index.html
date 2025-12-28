@@ -847,19 +847,27 @@
   border-bottom: 3px solid #FFD700;
 }
 
-/* Slider Container */
+/* Slider Container - Scrollbar now visible */
 .testimonial-slider {
   display: flex;
   gap: 25px;
   overflow-x: auto;
   padding: 20px;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Hide scrollbar for Chrome/Safari/Firefox */
-  -ms-overflow-style: none;
+  /* Removed scroll-behavior: smooth to prevent conflict with JS auto-scroll */
+  scrollbar-width: auto; 
+  -ms-overflow-style: auto;
 }
 
+/* Scrollbar Styling */
 .testimonial-slider::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+.testimonial-slider::-webkit-scrollbar-thumb {
+  background: #004080;
+  border-radius: 10px;
+}
+.testimonial-slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
 .testimonial-card {
@@ -1397,39 +1405,35 @@ setInterval(createFirework, 4000);
 
 function initTestimonialSlider() {
   const slider = document.getElementById('testimonialSlider');
+  if (!slider) return;
+
   let isDown = false;
-  let scrollLeft;
   let startX;
+  let scrollLeft;
 
-  // 1. Auto-scroll functionality
-  let scrollAmount = 0;
-  const step = 1; // Speed of auto-scroll
-  
-  function autoPlay() {
-    if (!isDown) { // Only scroll if user isn't dragging
-      slider.scrollLeft += step;
-      if (slider.scrollLeft >= (slider.scrollWidth - slider.offsetWidth)) {
-        slider.scrollLeft = 0; // Reset to start
-      }
-    }
-    requestAnimationFrame(autoPlay);
-  }
-  
-  autoPlay();
-
-  // 2. Drag to scroll (for desktop mouse users)
+  // Mouse Drag functionality for desktop users
   slider.addEventListener('mousedown', (e) => {
     isDown = true;
+    slider.style.cursor = 'grabbing';
     startX = e.pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
   });
-  slider.addEventListener('mouseleave', () => isDown = false);
-  slider.addEventListener('mouseup', () => isDown = false);
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.style.cursor = 'default';
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.style.cursor = 'default';
+  });
+
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2;
+    const walk = (x - startX) * 2; // Scroll speed multiplier
     slider.scrollLeft = scrollLeft - walk;
   });
 }
