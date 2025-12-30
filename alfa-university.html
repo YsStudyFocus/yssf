@@ -493,21 +493,56 @@ tr:last-child td {
 
 <!-- JavaScript to handle accordion and search -->
 <script>
-// 1. Unified Accordion Logic (No Desktop Prompt)
-const acc = document.querySelectorAll(".accordion");
-acc.forEach(btn => {
-  btn.addEventListener("click", function() {
-    this.classList.toggle("active");
-    const panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
+ let isDesktopMode = false;
+
+// 1. Desktop View Toggle Logic
+function toggleDesktopView() {
+  const viewport = document.querySelector('meta[name="viewport"]');
+  const btn = document.getElementById('desktop-toggle-btn');
+  
+  if (!isDesktopMode) {
+    viewport.setAttribute('content', 'width=1200, initial-scale=0.3');
+    document.body.classList.add('force-desktop');
+    btn.innerHTML = "📱 Switch Back to Mobile View";
+    btn.style.background = "#4CAF50";
+    isDesktopMode = true;
+  } else {
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+    document.body.classList.remove('force-desktop');
+    btn.innerHTML = "🖥️ Switch to Desktop View for Better Table Layout";
+    btn.style.background = "#ff9800";
+    isDesktopMode = false;
+  }
+}
+
+// 2. Combined Accordion and Popup Logic
+document.addEventListener("DOMContentLoaded", function() {
+  const acc = document.querySelectorAll(".accordion");
+  acc.forEach(btn => {
+    btn.addEventListener("click", function() {
+      // Show popup ONLY if on mobile and NOT already in desktop mode
+      if (window.innerWidth < 1000 && !isDesktopMode) {
+        const wantDesktop = confirm("Tip: This table looks best in Desktop View. Switch now?");
+        if (wantDesktop) { toggleDesktopView(); return; } 
+      }
+      
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      panel.style.display = (panel.style.display === "block") ? "none" : "block";
+    });
   });
+
+  // Auto-run search from URL
+  const searchTerm = new URLSearchParams(window.location.search).get('q');
+  if (searchTerm) {
+    const input = document.getElementById('searchInput');
+    input.value = decodeURIComponent(searchTerm);
+    filterPrograms();
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 });
 
-// 2. Search Filter Logic
+// 3. Search Logic
 function filterPrograms() {
   const input = document.getElementById("searchInput").value.toLowerCase().trim();
   const tables = document.querySelectorAll("table");
@@ -517,29 +552,27 @@ function filterPrograms() {
     let foundInTable = false;
 
     for (let i = 1; i < rows.length; i++) {
-      const rowText = rows[i].textContent.toLowerCase();
-      if (input !== "" && rowText.includes(input)) {
-        rows[i].style.display = "";
-        rows[i].classList.add("highlight");
+      const row = rows[i];
+      if (row.textContent.toLowerCase().includes(input) && input !== "") {
+        row.style.display = "";
+        row.classList.add("highlight");
         foundInTable = true;
       } else if (input === "") {
-        rows[i].style.display = "";
-        rows[i].classList.remove("highlight");
+        row.style.display = "";
+        row.classList.remove("highlight");
+        foundInTable = true;
       } else {
-        rows[i].style.display = "none";
-        rows[i].classList.remove("highlight");
+        row.style.display = "none";
+        row.classList.remove("highlight");
       }
     }
 
-    const panel = table.closest(".panel");
-    const accordion = panel.previousElementSibling;
-    
+    const panel = table.closest(".panel") || table.nextElementSibling; // Fallback for non-accordion tables
+    const accordion = panel ? panel.previousElementSibling : null;
+
     if (foundInTable && input !== "") {
-      panel.style.display = "block";
-      accordion.classList.add("active");
-    } else if (input === "") {
-      panel.style.display = "none";
-      accordion.classList.remove("active");
+      if (panel) panel.style.display = "block";
+      if (accordion && accordion.classList.contains('accordion')) accordion.classList.add("active");
     }
   });
 }
