@@ -52,23 +52,66 @@
 .menu-icon {
   position: static !important;
 }
-    .nav-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      z-index: 1000;
-    }
-    .nav-menu a {
-      display: block;
-      color: white;
-      margin-bottom: 10px;
-      text-decoration: none;
-    }
+    /* --- MODERN FULL-SCREEN NAVIGATION --- */
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden by default */
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 64, 128, 0.95); /* Your brand blue with transparency */
+  backdrop-filter: blur(10px); /* Modern blur effect */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.nav-menu.active {
+  right: 0; /* Slides in */
+}
+
+.nav-menu a {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 15px 0;
+  padding: 10px 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Staggered animation for links when menu opens */
+.nav-menu.active a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay each link slightly for a "waterfall" effect */
+.nav-menu.active a:nth-child(1) { transition-delay: 0.2s; }
+.nav-menu.active a:nth-child(2) { transition-delay: 0.3s; }
+.nav-menu.active a:nth-child(3) { transition-delay: 0.4s; }
+.nav-menu.active a:nth-child(4) { transition-delay: 0.5s; }
+
+.nav-menu a:hover {
+  color: #FFD700; /* Gold */
+  letter-spacing: 2px;
+}
+
+/* Add a Close Button icon inside the menu */
+.close-menu {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+}
 
     header img {
       position: absolute;
@@ -230,57 +273,112 @@
       }
     }
     
-    .search-section {
-  background-color: #f0f8ff; /* light blue to stand out from About Us */
-  padding: 30px;
+/* --- ENHANCED SEARCH SECTION --- */
+.search-section {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f8ff 100%);
+  padding: 60px 20px;
   text-align: center;
+  border-bottom: 1px solid #d1e9ff;
 }
 
 .search-section h2 {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  color: #004080;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .search-box {
   display: inline-flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 0; /* Connected look */
   justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.search-box:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 123, 255, 0.25);
+  border-color: #007BFF;
 }
 
 .search-bar {
-  padding: 10px 15px;
-  width: 250px;
-  max-width: 80%;
-  border: 2px solid #007BFF;
-  border-radius: 25px;
-  font-size: 16px;
+  padding: 15px 25px;
+  width: 350px;
+  max-width: 60vw;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  background: transparent;
+  color: #333;
 }
 
 .search-box button {
-  padding: 10px 20px;
+  padding: 15px 30px;
   cursor: pointer;
-  background-color: #007BFF;
+  background: linear-gradient(45deg, #007BFF, #0056b3);
   color: #fff;
   border: none;
-  border-radius: 25px;
-}
-#searchResults p {
-  margin: 10px 0;
+  border-radius: 40px;
+  font-weight: bold;
   font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-#searchResults button {
-  padding: 5px 12px;
-  border: none;
-  background-color: #007BFF;
+.search-box button:hover {
+  background: linear-gradient(45deg, #0056b3, #004080);
+  padding-right: 40px; /* Slight expansion effect */
+}
+
+#searchResults {
+  margin-top: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-result-item {
+  background: white;
+  margin: 10px 0;
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  border-left: 4px solid #007BFF;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.go-to-fees {
+  padding: 8px 18px;
+  background: #004080;
   color: white;
-  border-radius: 20px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
-#searchResults button:hover {
-  background-color: #0056b3;
+.go-to-fees:hover {
+  background: #FFD700;
+  color: #004080;
 }
 /* Container adjustment for stability and look */
 .uni-grid {
@@ -1095,11 +1193,12 @@
   </div>
 
   <div class="nav-menu" id="navMenu">
-    <a href="#">Home</a>
-    <a href="#about">About Us</a>
-    <a href="university-requirements.html">Learn Requirements</a>
-    <a href="#contact">Contact Us</a>
-  </div>
+  <div class="close-menu" onclick="toggleMenu()">&times;</div>
+  <a href="#" onclick="toggleMenu()">Home</a>
+  <a href="#about" onclick="toggleMenu()">About Us</a>
+  <a href="university-requirements.html" onclick="toggleMenu()">Learn Requirements</a>
+  <a href="#contact" onclick="toggleMenu()">Contact Us</a>
+</div>
   
   <img src="yscover.png" alt="YS Cover">
   <div class="text-overlay">
@@ -1145,12 +1244,14 @@
 </div>
 </section>
 
-<!-- UNIVERSAL SUBJECT SEARCH -->
 <section class="search-section">
-  <h2>Search subject name here to find university</h2>
+  <h2><i class="fas fa-graduation-cap"></i> Find Your Perfect Program</h2>
+  <p style="margin-bottom: 20px; color: #666;">Enter a subject (e.g. "Business", "IT", "Engineering") to see available universities.</p>
   <div class="search-box">
-    <input type="text" id="subjectInput" placeholder="Type subject name..." class="search-bar" oninput="searchUniversities()">
-    <button onclick="searchUniversities()">Search</button>
+    <input type="text" id="subjectInput" placeholder="What do you want to study?" class="search-bar" oninput="searchUniversities()">
+    <button onclick="searchUniversities()">
+      <i class="fas fa-search"></i> Search
+    </button>
   </div>
   <div id="searchResults"></div>
 </section>
@@ -1626,25 +1727,29 @@
       });
     });
 
-    // 3. Display Results
+// 3. Display Results (Updated for modern card look)
     if (foundResults.length > 0) {
       foundResults.forEach(match => {
-        const campusDisplay = match.campus ? ` (${match.campus})` : '';
+        const campusDisplay = match.campus ? ` <small style="color:#888;">— ${match.campus}</small>` : '';
         const encodedProgram = encodeURIComponent(match.program);
         
-        // Use the uni link to create the 'Go to Fees' button
         const linkButton = match.link 
-          ? `<button onclick="window.location.href='${match.link}?q=${encodedProgram}';" class="go-to-fees">Go to Fees</button>` 
-          : `<button disabled>Page not linked</button>`;
+          ? `<button onclick="window.location.href='${match.link}?q=${encodedProgram}';" class="go-to-fees">View Fees</button>` 
+          : `<button disabled>Contact Agent</button>`;
           
         resultBox.innerHTML += `
-          <p>${match.uni}${campusDisplay} offers ${match.program} ${linkButton}</p>
+          <div class="search-result-item">
+            <div>
+               <strong style="color:#004080; display:block; font-size: 1.1em;">${match.program}</strong>
+               <span style="font-size: 0.9em; color: #555;">${match.uni}${campusDisplay}</span>
+            </div>
+            ${linkButton}
+          </div>
         `;
       });
     } else {
-      resultBox.innerHTML = "<p style='color: red;'>No university program found matching your search term.</p>";
+      resultBox.innerHTML = "<div style='padding:20px; color:#d9534f; background:#fff5f5; border-radius:10px;'>No programs found. Try searching for 'Business' or 'Science'.</div>";
     }
-  }
 
   const uniLinks = {
     "City University Malaysia": "city-university.html",
@@ -1665,9 +1770,16 @@
   };
 
   function toggleMenu() {
-    const menu = document.getElementById('navMenu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  const menu = document.getElementById('navMenu');
+  menu.classList.toggle('active');
+  
+  // Optional: Prevent background scrolling when menu is open
+  if (menu.classList.contains('active')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
   }
+}
 
   // Run the fetch function on page load
   document.addEventListener('DOMContentLoaded', fetchAllPrograms);
