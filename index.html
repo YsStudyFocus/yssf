@@ -18,13 +18,60 @@
   overflow-x: hidden; /* Add this to prevent horizontal scrolling */
   width: 100%;        /* Ensure it stays locked to viewport width */
 }
+
+
+/* Updated Header Height: Reduced by 70% of original view */
     header {
       position: relative;
-      height: 100vh;
+      height: 65vh; /* Adjusted from 100vh to be slimmer */
       background-color: #000;
       color: yellow;
       overflow: hidden;
+      display: flex;
+      align-items: center; /* Centers text overlay vertically */
     }
+
+    /* Modern Grid Background */
+    .header-grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 5 Columns for 5 Universities */
+      z-index: 0;
+      filter: blur(2px) brightness(0.7); /* Blur and darken for text readability */
+      transform: scale(1.1); /* Prevents white edges from blur */
+    }
+
+    .header-grid-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Text Overlay Tweaks for the new height */
+    .text-overlay {
+      position: relative; /* Changed from absolute to work with flex header */
+      left: 5%;
+      width: 80%;
+      z-index: 2;
+      color: white;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Ensures text is sharp */
+    }
+
+    /* Mobile responsiveness for the grid */
+    @media (max-width: 768px) {
+      .header-grid-bg {
+        grid-template-columns: repeat(3, 1fr); /* Only show 3 on mobile to look cleaner */
+      }
+      header {
+        height: 50vh;
+      }
+    }
+
     /* Container for top right icons */
 .top-right-actions {
   position: absolute;
@@ -70,15 +117,7 @@
       text-decoration: none;
     }
 
-    header img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
+  
 
     .text-overlay {
       position: absolute;
@@ -1145,7 +1184,6 @@
     <div class="action-icon" onclick="scrollToSearch()" title="Search">
       <i class="fas fa-search"></i>
     </div>
-    
     <div class="action-icon menu-icon" onclick="toggleMenu()" title="Menu">
       <i class="fas fa-bars"></i>
     </div>
@@ -1158,11 +1196,18 @@
     <a href="#contact">Contact Us</a>
   </div>
   
-  <img src="yscover.png" alt="YS Cover">
+  <div class="header-grid-bg">
+    <img src="inti_main.jpg" alt="INTI">
+    <img src="cityu_main.jpg" alt="City University">
+    <img src="kings_main.jpg" alt="Kings">
+    <img src="taylors_main.jpg" alt="Taylors">
+    <img src="segi_main.jpg" alt="SEGi">
+  </div>
+
   <div class="text-overlay">
     <h3>STUDENT GATEWAY TO MALAYSIA</h3>
     <h1>YS STUDY FOCUS, THE BEST AND THE MOST TRUSTED PLACE TO START YOUR PROCESSING FOR MALAYSIA</h1>
-    <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">START YOUR PROCESSING</a>
+    <a href="https://forms.gle/iFXQ3ohvY4JqCbWA9" target="_blank" class="start-btn">Book Consultation</a>
   </div>
 </header>
 
@@ -1194,10 +1239,11 @@
     <p class="stat-subtext">*Updated weekly based on processing</p>
   </div>
 
-  <div class="stat-card">
+  <div class="stat-card" onclick="window.location.href='expert-agents.html';" style="cursor: pointer;">
     <div class="stat-icon-circle"><i class="fas fa-user-tie"></i></div>
     <h2>8</h2>
     <p><b>Dedicated Expert Agents</b></p>
+    <p class="stat-subtext">Meet Our Team</p>
   </div>
 </div>
 </section>
