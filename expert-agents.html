@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Expert Team | YS Study Focus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --brand-blue: #004080;
+      --brand-gold: #FFD700;
+      --brand-light-blue: #007BFF;
+      --glass: rgba(255, 255, 255, 0.85);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', Arial, sans-serif; }
+
+    body { 
+      background-color: #f4f7f9; 
+      color: #333; 
+      overflow-x: hidden;
+    }
+
+    /* --- BRILLIANT HERO HEADER --- */
+    .hero-section {
+      height: 70vh;
+      background: linear-gradient(rgba(0, 64, 128, 0.9), rgba(0, 26, 51, 0.95)), url('office-bg.jpg'); /* Add a subtle office background image */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      padding: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero-section p {
+      max-width: 700px;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    /* --- BACK BUTTON --- */
+    .back-home {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      color: white;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+      z-index: 100;
+      font-weight: bold;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .back-home:hover { background: var(--brand-gold); color: #000; transform: translateX(-5px); }
+
+    /* --- THE AGENT GRID --- */
+    .agents-wrapper {
+      max-width: 1200px;
+      margin: -100px auto 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      padding: 20px;
+    }
+
+    /* --- MODERN AGENT CARD --- */
+    .agent-card {
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      border-radius: 30px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.4);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+
+    /* Glowing Border Effect (Subtle version of your Snake) */
+    .agent-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(transparent, transparent, var(--brand-gold), transparent);
+      animation: rotate 6s linear infinite;
+      z-index: -1;
+      opacity: 0;
+      transition: 0.5s;
+    }
+
+    .agent-card:hover::before { opacity: 1; }
+
+    .agent-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 30px 60px rgba(0, 64, 128, 0.2);
+    }
+
+    .profile-frame {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      padding: 8px;
+      background: linear-gradient(45deg, var(--brand-blue), var(--brand-gold));
+      position: relative;
+    }
+
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+      border: 4px solid #fff;
+    }
+
+    .agent-status {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      background: #25d366;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    .agent-card h3 {
+      font-size: 1.6rem;
+      color: var(--brand-blue);
+      margin-bottom: 8px;
+    }
+
+    .agent-role {
+      font-size: 0.9rem;
+      color: var(--brand-light-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .contact-icons a {
+      width: 45px;
+      height: 45px;
+      border-radius: 15px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brand-blue);
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .contact-icons a:hover {
+      background: var(--brand-blue);
+      color: #fff;
+      transform: translateY(-5px);
+    }
+
+    .consult-btn {
+      background: var(--brand-blue);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .consult-btn:hover {
+      background: transparent;
+      color: var(--brand-blue);
+      border-color: var(--brand-blue);
+      letter-spacing: 1px;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- FOOTER (Matches Index) --- */
+    footer {
+      background: #001a33;
+      color: white;
+      padding: 60px 20px 20px;
+      text-align: center;
+    }
+
+    .footer-logo img { width: 150px; margin-bottom: 20px; }
+
+    /* --- SUPPORTING AGENTS SECTION --- */
+.supporting-section-title {
+  text-align: center;
+  color: var(--brand-blue);
+  font-size: 2rem;
+  margin: 60px 0 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.supporting-wrapper {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* Square Card Modifier */
+.agent-card.square {
+  border-radius: 15px; /* Square with slight rounding */
+  padding: 30px 20px;
+}
+
+.agent-card.square .profile-frame {
+  border-radius: 10px; /* Square profile frame */
+  width: 120px;
+  height: 120px;
+}
+
+.agent-card.square .profile-frame img {
+  border-radius: 8px; /* Square image */
+}
+
+.agent-card.square::before {
+  border-radius: 15px; /* Adjust glow to square shape */
+}
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      .hero-section { height: 50vh; padding-top: 80px; }
+      .agents-wrapper { margin-top: -50px; }
+    }
+
+    /* --- SABRINA'S SPECIAL BORDER ANIMATION --- */
+
+.active-glow {
+  position: relative;
+  /* Ensure the background of the card covers the animation inside */
+  background: #fff; 
+  z-index: 1;
+}
+
+/* The Rotating Light Source */
+.active-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px; 
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 70%,
+    var(--brand-gold) 100%
+  );
+  border-radius: 32px; /* Matches card radius + offset */
+  z-index: -1;
+  animation: rotateGlow 4s linear infinite;
+}
+
+/* Inner Mask to keep the border thin and clean */
+.active-glow::after {
+  content: '';
+  position: absolute;
+  inset: 2px; /* Thickness of the border */
+  background: #fff; /* Matches card background */
+  border-radius: 28px;
+  z-index: -1;
+}
+
+/* Smooth Rotation Keyframes */
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Center Card Specific Positioning (Sabrina Higher) */
+.center-card {
+  transform: translateY(-40px);
+  z-index: 10;
+  /* Add a soft outer shadow to the glow */
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); 
+}
+
+.center-card:hover {
+  transform: translateY(-55px) scale(1.02);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Side Cards Positioning (Nahid & Adnan Lower) */
+.left-card, .right-card {
+  transform: translateY(20px);
+  z-index: 5;
+}
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-home"><i class="fas fa-home"></i> Home</a>
+
+  <header class="hero-section">
+    <h1>Our Elite Agents</h1>
+    <p>Success starts with the right advice. Meet the industry experts dedicated to making your Malaysian education dreams a reality.</p>
+  </header>
+
+  <div class="agents-wrapper">
+    
+    <div class="agent-card left-card">
+      <div class="profile-frame">
+        <img src="agent2.jpg" alt="Nahid Jahan">
+        <div class="agent-status"></div>
+      </div>
+      <h3>Nahid Jahan</h3>
+      <span class="agent-role">Lead Consultant</span>
+      <div class="contact-icons">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+      <a href="#" class="consult-btn">Consult With Nahid</a>
+    </div>
+
+    <div class="agent-card center-card middle-card">
+  <div class="profile-frame">
+    <img src="agent1.jpg" alt="Sabrina Jannat">
+    <div class="agent-status"></div>
+  </div>
+  <h3>Sabrina Jannat</h3>
+  <span class="agent-role">Founder & Excutive</span>
+  <div class="contact-icons">
+    <a href="#"><i class="fab fa-whatsapp"></i></a>
+    <a href="#"><i class="fab fa-facebook-messenger"></i></a>
+    <a href="#"><i class="fas fa-envelope"></i></a>
+  </div>
+  <a href="https://wa.me/601139660706" class="consult-btn">Consult With Sabrina</a>
+</div>
+
+    <div class="agent-card right-card">
+      <div class="profile-frame">
+        <img src="student_profile5.jpg" alt="Ismam Zaman">
+        <div class="agent-status"></div>
+      </div>
+      <h3>Ismam Zaman</h3>
+      <span class="agent-role">Sudent Coordinator</span>
+      <div class="contact-icons">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+      <a href="#" class="consult-btn">Consult With Ismam</a>
+    </div>
+
+
+</div>
+
+<h2 class="supporting-section-title">Support Team</h2>
+  <div class="supporting-wrapper">
+    
+    <div class="agent-card square">
+      <div class="profile-frame">
+        <img src="support1.jpg" alt="Miadul Nijjon">
+      </div>
+      <h3>Miadul Nijjon</h3>
+      <span class="agent-role">Administrative Support</span>
+    </div>
+
+    <div class="agent-card square">
+      <div class="profile-frame">
+        <img src="support2.jpg" alt="Adiba Mim">
+      </div>
+      <h3>Adiba Mim</h3>
+      <span class="agent-role">Student Counselor</span>
+    </div>
+
+    <div class="agent-card square">
+      <div class="profile-frame">
+        <img src="support3.jpg" alt="Polash Ahmed">
+      </div>
+      <h3>Polash Ahmed</h3>
+      <span class="agent-role">Documentation Officer</span>
+    </div>
+
+    <div class="agent-card square">
+      <div class="profile-frame">
+        <img src="support4.jpg" alt="Rover Abdul Kaium">
+      </div>
+      <h3>Rover Abdul Kaium</h3>
+      <span class="agent-role">Liaison Officer</span>
+    </div>
+
+    <div class="agent-card square">
+      <div class="profile-frame">
+        <img src="support5.jpg" alt="Mohamed Bin Fariaz">
+      </div>
+      <h3>M. Bin Fariaz</h3>
+      <span class="agent-role">Regional Coordinator</span>
+    </div>
+
+    <div class="agent-card square">
+      <div class="profile-frame">
+        <img src="support6.jpg" alt="Rayhan Mollah">
+      </div>
+      <h3>Rayhan Mollah</h3>
+      <span class="agent-role">Academic Advisor</span>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="ys_logo.png" alt="YS Logo">
+    </div>
+    <p>&copy; 2025 YS Study Focus. Trusted Gateway to Malaysia.</p>
+  </footer>
+
+</body>
+</html>
