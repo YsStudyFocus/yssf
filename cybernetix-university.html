@@ -291,25 +291,22 @@ tr:last-child td {
 
 <div class="container">
 
-<button id="desktop-toggle-btn" onclick="toggleDesktopView()">
-    🖥️ Switch to Desktop View for Better Table Layout
-  </button>
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search program name..." onkeyup="filterPrograms()" />
+</div>
 
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search program name..." onkeyup="filterPrograms()" />
-  </div>
-
-<table>
-  <tr>
-    <th>No</th>
-    <th>Programme</th>
-    <th>Level</th>
-    <th>Duration</th>
-    <th>1st Year (RM)</th>
-    <th>2nd Year (RM)</th>
-    <th>3rd Year (RM)</th>
-    <th>Total (RM)</th>
-  </tr>
+<div class="panel" style="display: block; border-top: 1px solid #e0e6ed; border-radius: 12px;">
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Programme</th>
+      <th>Level</th>
+      <th>Duration</th>
+      <th>Year 1 (RM)</th>
+      <th>Year 2 (RM)</th>
+      <th>Year 3 (RM)</th>
+      <th>Total (RM)</th>
+    </tr>
 
   <tr><td>1</td><td>Certificate in Creative Multimedia</td><td>Certificate</td><td>1-2 Years</td><td>13,100</td><td>8,750</td><td>-</td><td>21,850</td></tr>
   <tr><td>2</td><td>Certificate of Aviation Management</td><td>Certificate</td><td>1-2 Years</td><td>13,100</td><td>8,750</td><td>-</td><td>21,850</td></tr>
@@ -326,13 +323,12 @@ tr:last-child td {
   <tr><td>12</td><td>Diploma in Hotel Management</td><td>Diploma</td><td>3 Years</td><td>14,200</td><td>9,750</td><td>10,250</td><td>34,200</td></tr>
 </table>
 
-<div class="note">
-  <div class="download-bar" onclick="downloadPDF('cybernetics')">
-    <span>Download PDF</span>
-    <span>⬇️</span>
-  </div>
-
-  <strong>Initial Payment Breakdown (Diploma):</strong><br>
+  <div class="note">
+    <div class="download-bar" onclick="downloadPDF('genovasi')">
+      <span>Download PDF</span>
+      <span>⬇️</span>
+    </div>
+    <strong>Initial Payment Breakdown (Diploma):</strong><br>
   • EMGS: RM 3,500<br>
   • Personal Bond: RM 750<br>
   • Application Fee: RM 250<br>
@@ -345,6 +341,7 @@ tr:last-child td {
   • 1. EMGS fee is strictly non-refundable under any circumstances.<br>
   • 2. Students without an English proficiency certificate must complete a course for RM 3,000.<br>
   • 3. Total fees for Certificate programs start at RM 13,100 for the first year.
+  </div>
 </div>
 
 <footer>
@@ -426,6 +423,5 @@ function downloadPDF(programKey) {
   document.body.removeChild(link);
 }
 </script>
-
 </body>
 </html>
