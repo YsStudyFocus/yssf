@@ -343,9 +343,9 @@ tr:last-child td {
     </table>
     <div class="note">
       <div class="download-bar" onclick="downloadPDF('taylors_diploma')">
-        <span>Download PDF</span>
-        <span>⬇️</span>
-      </div>
+  <span>Download PDF</span>
+  <span>⬇️</span>
+</div>
       <strong>Note:</strong> Grand totals include tuition, enrolment, EMGS visa, and medical insurance for the minimum duration.
     </div>
   </div>
@@ -392,12 +392,17 @@ tr:last-child td {
       <tr><td>8</td><td>Postgraduate Certificate in Teaching & Learning</td><td>9 months</td><td>RM35,474</td><td>$8,250</td></tr>
     </table>
     <div class="note">
-      <div class="download-bar" onclick="downloadPDF('taylors_masters')">
-        <span>Download PDF</span>
-        <span>⬇️</span>
-      </div>
-      <strong>Masters Misc Fees:</strong> Application & EMGS: RM3,810; Student Charge: RM8,000.
-    </div>
+  <div class="download-bar" onclick="downloadPDF('taylors_masters')" style="margin-bottom: 10px;">
+    <span>Hospitality PDF</span>
+    <span>⬇️</span>
+  </div>
+  <br>
+  <div class="download-bar" onclick="downloadPDF('taylors_masters_research')">
+    <span>Research PDF</span>
+    <span>⬇️</span>
+  </div>
+  <strong>Masters Misc Fees:</strong> Application & EMGS: RM3,810; Student Charge: RM8,000.
+</div>
   </div>
 
   <button class="accordion">PHD PROGRAMS</button>
@@ -495,50 +500,46 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-  // 4. Updated PDF Download Logic
-  function downloadPDF(programKey) {
-    const key = "tayloru_pdf_download_time_" + programKey;
-    const lastDownload = localStorage.getItem(key);
-    
-    if (lastDownload) {
-      if (!confirm("You already downloaded this. Download again?")) return;
-    }
-    
-    localStorage.setItem(key, new Date().getTime());
-    
-    let fileName = "";
-    
-    // Logic to select the specific PDF based on the button clicked
-    switch(programKey) {
-      case 'taylors_foundation':
-        fileName = "taylors-university-fees-summary.pdf"; // Foundation is typically in the summary
-        break;
-      case 'taylors_diploma':
-        fileName = "taylors-diploma-fee-2025.pdf";
-        break;
-      case 'taylors_bachelor':
-        fileName = "taylors-university-fees-summary.pdf";
-        break;
-      case 'taylors_masters':
-        fileName = "taylors-master-in-hospitality-management-fees-pg-usd-v030524.pdf";
-        break;
-      case 'taylors_masters_research':
-        fileName = "taylors-master-research-pg-fees-usd-v030524.pdf";
-        break;
-      case 'taylors_phd':
-        fileName = "taylors-fees-dr-philosophy-research-pg-usd-v130825.pdf";
-        break;
-      default:
-        fileName = "taylors-university-fees-summary.pdf";
-    }
-
-    const link = document.createElement("a");
-    link.href = fileName; 
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+ // 4. Updated PDF Download Logic
+function downloadPDF(programKey) {
+  const key = "tayloru_pdf_download_time_" + programKey;
+  const lastDownload = localStorage.getItem(key);
+  
+  if (lastDownload) {
+    if (!confirm("You already downloaded this. Download again?")) return;
   }
+  
+  localStorage.setItem(key, new Date().getTime());
+  
+  let fileName = "";
+  
+  // Logic to select the specific PDF based on the button clicked
+  switch(programKey) {
+    case 'taylors_diploma':
+      fileName = "Taylors Diploma fee 2025.pdf";
+      break;
+    case 'taylors_masters':
+      fileName = "taylors-master-in-hospitality-management-fees-pg-usd-v030524.pdf";
+      break;
+    case 'taylors_masters_research':
+      fileName = "taylors-master-research-pg-fees-usd-v030524.pdf";
+      break;
+    case 'taylors_phd':
+      fileName = "taylors-fees-dr-philosophy-research-pg-usd-v130825.pdf";
+      break;
+    default:
+      // Fallback for Foundation or Bachelor if no specific file exists
+      fileName = "Taylors Diploma fee 2025.pdf"; 
+  }
+
+  const link = document.createElement("a");
+  // If your PDFs are in a folder, add the folder path here, e.g., "pdfs/" + fileName
+  link.href = fileName; 
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 </script>
 
 </body>
