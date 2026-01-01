@@ -1692,9 +1692,13 @@
   </footer>
 
  <script>
-let ALL_PROGRAMS = []; 
+// --- 1. Global Variables to manage "See More" logic ---
+  let ALL_PROGRAMS = []; 
+  let currentMatches = []; // Stores all results found
+  let visibleCount = 0;    // Tracks how many are currently shown
+  const BATCH_SIZE = 10;   // How many to show at a time
 
-  // Move the links object OUTSIDE so the function can always see it
+  // University Links Mapping
   const uniLinks = {
     "City University Malaysia": "city-university.html",
     "Infrastructure University Kuala Lumpur (IUKL)": "iukl-fees.html",
@@ -1703,7 +1707,7 @@ let ALL_PROGRAMS = [];
     "INTI International University": "inti-university.html",
     "UNIVERSITY OF CYBERJAYA": "university-of-cyberjaya.html",
     "University College MAIWP International (UCMI)": "ucmi-university.html",
-    "CYBERNETICS MALAYSIA (KTAC)": "cybernetix-university.html",
+    "CYBERNETICS MALAYSIA (KTAC)": "cybernetics-university.html",
     "GENOVASI UNIVERSITY MALAYSIA": "genovasi-university.html",
     "SEGI UNIVERSITY MALAYSIA": "segi-university.html",
     "Taylor's University": "taylors-university.html",
@@ -1725,44 +1729,68 @@ let ALL_PROGRAMS = [];
     }
   }
 
+  // --- 2. Main Search Function ---
   function searchUniversities() {
-  const input = document.getElementById("subjectInput").value.toLowerCase().trim();
-  const resultBox = document.getElementById("searchResults");
-  
-  resultBox.innerHTML = "";
-  if (input.length < 2) return;
-
-  let foundResults = [];
-  const searchTerms = input.split(' ').filter(term => term.length > 0);
-  
-  ALL_PROGRAMS.forEach(uni => {
-    const universityName = uni.name;
-    const universityLink = uniLinks[universityName] || "#"; 
+    const input = document.getElementById("subjectInput").value.toLowerCase().trim();
+    const resultBox = document.getElementById("searchResults");
     
-    uni.programs.forEach(program => {
-      const programNameLower = program.name.toLowerCase();
-      const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
-      
-      if (allTermsMatch) {
-        foundResults.push({
-          uni: universityName,
-          campus: program.campus,
-          program: program.name,
-          link: universityLink
-        });
-      }
-    });
-  });
+    // Reset everything for a new search
+    resultBox.innerHTML = "";
+    currentMatches = [];
+    visibleCount = 0;
 
-  if (foundResults.length > 0) {
-    foundResults.slice(0, 10).forEach(match => {
+    if (input.length < 2) return;
+
+    const searchTerms = input.split(' ').filter(term => term.length > 0);
+    
+    // Find ALL matches first and store them
+    ALL_PROGRAMS.forEach(uni => {
+      const universityName = uni.name;
+      const universityLink = uniLinks[universityName] || "#"; 
+      
+      uni.programs.forEach(program => {
+        const programNameLower = program.name.toLowerCase();
+        const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
+        
+        if (allTermsMatch) {
+          currentMatches.push({
+            uni: universityName,
+            campus: program.campus,
+            program: program.name,
+            link: universityLink
+          });
+        }
+      });
+    });
+
+    if (currentMatches.length > 0) {
+      // Load the first batch
+      renderNextBatch();
+    } else {
+      resultBox.innerHTML = "<div style='padding:20px; color:#666;'>No results found.</div>";
+    }
+  }
+
+  // --- 3. Function to Render the Next 10 Results ---
+  function renderNextBatch() {
+    const resultBox = document.getElementById("searchResults");
+    
+    // Remove the "See More" button if it exists (so we can move it to the bottom later)
+    const existingBtn = document.getElementById("seeMoreBtnContainer");
+    if (existingBtn) existingBtn.remove();
+
+    // Slice the next 10 items from the list
+    const nextBatch = currentMatches.slice(visibleCount, visibleCount + BATCH_SIZE);
+
+    nextBatch.forEach(match => {
       const campusDisplay = match.campus ? ` — ${match.campus}` : '';
       const encodedProgram = encodeURIComponent(match.program);
       
-      // Check if it's a Bachelor program to apply the yellow button style
+      // Bachelor style check
       const isBachelor = match.program.toLowerCase().includes('bachelor');
       const itemClass = isBachelor ? 'search-result-item bachelor' : 'search-result-item';
 
+      // Append new result to the list
       resultBox.innerHTML += `
         <div class="${itemClass}">
           <div class="result-info">
@@ -1775,14 +1803,32 @@ let ALL_PROGRAMS = [];
         </div>
       `;
     });
-  } else {
-    resultBox.innerHTML = "<div style='padding:20px; color:#666;'>No results found.</div>";
-  }
-}
 
-  function toggleMenu() {
-    const menu = document.getElementById('navMenu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    // Update the counter
+    visibleCount += nextBatch.length;
+
+    // --- 4. If there are MORE matches left, show the button again ---
+    if (visibleCount < currentMatches.length) {
+      const remaining = currentMatches.length - visibleCount;
+      resultBox.innerHTML += `
+        <div id="seeMoreBtnContainer" style="text-align: center; margin-top: 15px;">
+          <button onclick="renderNextBatch()" style="
+            background-color: #004080; 
+            color: white; 
+            border: none; 
+            padding: 10px 25px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+          " onmouseover="this.style.backgroundColor='#007BFF'" 
+            onmouseout="this.style.backgroundColor='#004080'">
+            See More Universities (${remaining} more)
+          </button>
+        </div>
+      `;
+    }
   }
 
   // Run the fetch function on page load
