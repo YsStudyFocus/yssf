@@ -1184,6 +1184,46 @@
   box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
 }
 
+/* --- Filter Bar Styling --- */
+.filter-container {
+  display: none; /* Hidden by default, shown via JS */
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px auto 10px;
+  max-width: 800px;
+  animation: fadeIn 0.5s ease;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border: 1px solid #004080;
+  background-color: white;
+  color: #004080;
+  border-radius: 25px; /* Pill shape */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.filter-btn:hover {
+  background-color: #e6f0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 64, 128, 0.15);
+}
+
+.filter-btn.active {
+  background-color: #004080;
+  color: white; /* White text on blue background */
+  box-shadow: 0 4px 8px rgba(0, 64, 128, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
   </style>
 </head>
 <body>
@@ -1279,6 +1319,16 @@
     <button onclick="searchUniversities()">
       <i class="fas fa-search"></i> Search
     </button>
+  </div>
+
+  <div class="filter-container" id="filterBar">
+    <button class="filter-btn active" onclick="filterResults('All', this)">All</button>
+    <button class="filter-btn" onclick="filterResults('Foundation', this)">Foundation</button>
+    <button class="filter-btn" onclick="filterResults('Diploma', this)">Diploma</button>
+    <button class="filter-btn" onclick="filterResults('Bachelor', this)">Bachelor</button>
+    <button class="filter-btn" onclick="filterResults('Master', this)">Masters</button>
+    <button class="filter-btn" onclick="filterResults('Certificate', this)">Certificate</button>
+    <button class="filter-btn" onclick="filterResults('PhD', this)">PhD</button>
   </div>
   <div id="searchResults"></div>
 </section>
@@ -1728,22 +1778,29 @@
       document.getElementById('searchResults').innerHTML = '<p style="color: red;">Error loading university data.</p>';
     }
   }
+// --- Global Variable for Filtering ---
+  let baseSearchResults = []; // Stores the original list of matches
 
-  // --- 2. Main Search Function ---
+  // --- 2. Updated Search Function ---
   function searchUniversities() {
     const input = document.getElementById("subjectInput").value.toLowerCase().trim();
     const resultBox = document.getElementById("searchResults");
+    const filterBar = document.getElementById("filterBar");
     
-    // Reset everything for a new search
+    // Reset Display
     resultBox.innerHTML = "";
+    baseSearchResults = []; 
     currentMatches = [];
     visibleCount = 0;
+
+    // Hide filter bar initially
+    if(filterBar) filterBar.style.display = 'none';
 
     if (input.length < 2) return;
 
     const searchTerms = input.split(' ').filter(term => term.length > 0);
     
-    // Find ALL matches first and store them
+    // 1. Find ALL matches based on text input
     ALL_PROGRAMS.forEach(uni => {
       const universityName = uni.name;
       const universityLink = uniLinks[universityName] || "#"; 
@@ -1753,7 +1810,8 @@
         const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
         
         if (allTermsMatch) {
-          currentMatches.push({
+          // Push to baseSearchResults instead of currentMatches immediately
+          baseSearchResults.push({
             uni: universityName,
             campus: program.campus,
             program: program.name,
@@ -1763,11 +1821,57 @@
       });
     });
 
+    // 2. Logic to Show/Hide Filter Bar
+    if (baseSearchResults.length >= 10) {
+      if(filterBar) {
+        filterBar.style.display = 'flex'; // Show filters
+        // Reset active button to 'All'
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+        if(btns[0]) btns[0].classList.add('active');
+      }
+    }
+
+    // 3. Initial Render (Show All)
+    currentMatches = [...baseSearchResults];
+
     if (currentMatches.length > 0) {
-      // Load the first batch
       renderNextBatch();
     } else {
       resultBox.innerHTML = "<div style='padding:20px; color:#666;'>No results found.</div>";
+    }
+  }
+
+  // --- New Filter Logic ---
+  function filterResults(category, btnElement) {
+    // 1. Visual Update (Change active button color)
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // 2. Reset Display
+    const resultBox = document.getElementById("searchResults");
+    resultBox.innerHTML = "";
+    visibleCount = 0;
+    
+    // 3. Filter the Data
+    if (category === 'All') {
+      currentMatches = [...baseSearchResults];
+    } else {
+      // Filter the original search results based on the button clicked
+      // We use 'includes' so 'Bachelor' matches 'Bachelor of Science'
+      // We use 'Master' for 'Masters' to catch 'Master of Arts' etc.
+      const searchKey = category === 'Masters' ? 'Master' : category;
+      
+      currentMatches = baseSearchResults.filter(item => 
+        item.program.toLowerCase().includes(searchKey.toLowerCase())
+      );
+    }
+
+    // 4. Render
+    if (currentMatches.length > 0) {
+      renderNextBatch();
+    } else {
+      resultBox.innerHTML = "<div style='padding:20px; color:#666;'>No " + category + " programmes found for this search.</div>";
     }
   }
 
