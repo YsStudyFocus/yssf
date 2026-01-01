@@ -324,23 +324,68 @@
   border: none;
   border-radius: 25px;
 }
-#searchResults p {
-  margin: 10px 0;
-  font-size: 16px;
+/* Container for search results */
+#searchResults {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 10px;
 }
 
-#searchResults button {
-  padding: 5px 12px;
-  border: none;
-  background-color: #007BFF;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
+/* Individual Result Card */
+.search-result-item {
+  background: white;
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-left: 5px solid #007BFF; /* Blue accent on the left */
+}
+
+.result-info {
+  flex: 1;
+}
+
+.result-info h4 {
+  color: #004080;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.result-info p {
+  color: #777;
   font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-#searchResults button:hover {
-  background-color: #0056b3;
+/* The "View Fees" Button */
+.go-to-fees {
+  background-color: #003366; /* Deep blue */
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.2;
+  min-width: 80px;
+  transition: transform 0.2s;
+}
+
+/* Yellow button for Bachelor degrees (as seen in your image) */
+.search-result-item.bachelor .go-to-fees {
+  background-color: #FFD700;
+  color: #003366;
+}
+
+.go-to-fees:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 /* Container adjustment for stability and look */
 .uni-grid {
@@ -1681,58 +1726,59 @@ let ALL_PROGRAMS = [];
   }
 
   function searchUniversities() {
-    const input = document.getElementById("subjectInput").value.toLowerCase().trim();
-    const resultBox = document.getElementById("searchResults");
-    
-    resultBox.innerHTML = "";
-    
-    if (input.length < 2) {
-      return; // Wait for at least 2 characters
-    }
+  const input = document.getElementById("subjectInput").value.toLowerCase().trim();
+  const resultBox = document.getElementById("searchResults");
+  
+  resultBox.innerHTML = "";
+  if (input.length < 2) return;
 
-    let foundResults = [];
-    const searchTerms = input.split(' ').filter(term => term.length > 0);
+  let foundResults = [];
+  const searchTerms = input.split(' ').filter(term => term.length > 0);
+  
+  ALL_PROGRAMS.forEach(uni => {
+    const universityName = uni.name;
+    const universityLink = uniLinks[universityName] || "#"; 
     
-    ALL_PROGRAMS.forEach(uni => {
-      const universityName = uni.name;
-      // Use the global uniLinks map
-      const universityLink = uniLinks[universityName] || "#"; 
+    uni.programs.forEach(program => {
+      const programNameLower = program.name.toLowerCase();
+      const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
       
-      uni.programs.forEach(program => {
-        const programNameLower = program.name.toLowerCase();
-        const allTermsMatch = searchTerms.every(term => programNameLower.includes(term));
-        
-        if (allTermsMatch) {
-          foundResults.push({
-            uni: universityName,
-            campus: program.campus,
-            program: program.name,
-            link: universityLink
-          });
-        }
-      });
+      if (allTermsMatch) {
+        foundResults.push({
+          uni: universityName,
+          campus: program.campus,
+          program: program.name,
+          link: universityLink
+        });
+      }
     });
+  });
 
-    if (foundResults.length > 0) {
-      // Limit to top 10 results for performance
-      foundResults.slice(0, 10).forEach(match => {
-        const campusDisplay = match.campus ? ` — ${match.campus}` : '';
-        const encodedProgram = encodeURIComponent(match.program);
-        
-        resultBox.innerHTML += `
-          <div class="search-result-item">
-            <div>
-               <strong style="color:#004080; display:block; font-size: 1.1em;">${match.program}</strong>
-               <span style="font-size: 0.9em; color: #555;">${match.uni}${campusDisplay}</span>
-            </div>
-            <button onclick="window.location.href='${match.link}?q=${encodedProgram}';" class="go-to-fees">View Fees</button>
+  if (foundResults.length > 0) {
+    foundResults.slice(0, 10).forEach(match => {
+      const campusDisplay = match.campus ? ` — ${match.campus}` : '';
+      const encodedProgram = encodeURIComponent(match.program);
+      
+      // Check if it's a Bachelor program to apply the yellow button style
+      const isBachelor = match.program.toLowerCase().includes('bachelor');
+      const itemClass = isBachelor ? 'search-result-item bachelor' : 'search-result-item';
+
+      resultBox.innerHTML += `
+        <div class="${itemClass}">
+          <div class="result-info">
+             <h4>${match.program}</h4>
+             <p>${match.uni}${campusDisplay}</p>
           </div>
-        `;
-      });
-    } else {
-      resultBox.innerHTML = "<div style='padding:20px; color:#666; background:white; border-radius:10px;'>No results found. Try 'Business' or 'IT'.</div>";
-    }
+          <button onclick="window.location.href='${match.link}?q=${encodedProgram}';" class="go-to-fees">
+            View<br>Fees
+          </button>
+        </div>
+      `;
+    });
+  } else {
+    resultBox.innerHTML = "<div style='padding:20px; color:#666;'>No results found.</div>";
   }
+}
 
   function toggleMenu() {
     const menu = document.getElementById('navMenu');
