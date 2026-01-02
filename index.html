@@ -771,17 +771,6 @@
   transform: rotate(calc(360deg / -8 * var(--i))); 
 }
 
-.contact-cta-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 10%; /* Reduced from 80px to match the section above */
-  background-color: #ffffff;
-  gap: 50px;
-  flex-wrap: wrap;
-  overflow: hidden; 
-  position: relative;
-}
 
 .contact-left {
   flex: 1.2;
@@ -914,47 +903,77 @@
   z-index: 100;
 }
 
-.paper-plane {
-  position: absolute;
-  color: #004080; /* Match your brand blue */
-  font-size: 24px;
-  offset-path: path("M 250,80 C 300,200 150,250 200,300 C 400,450 800,200 1100,100"); /* The "Smooth" line */
-  animation: fly 4s infinite linear;
-  opacity: 0;
+/* --- 1. Container Stability --- */
+/* Ensures the plane never causes scrollbars or shaking on mobile */
+.contact-cta-section {
+  position: relative;
+  overflow: hidden; /* CRITICAL: Clips anything flying outside */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10%;
+  background-color: #ffffff;
+  gap: 50px;
+  flex-wrap: wrap;
 }
 
+/* --- 2. The Paper Plane Animation --- */
+#flight-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* --- 2. The Paper Plane Animation --- */
+.paper-plane {
+  position: absolute;
+  color: #004080; 
+  font-size: 28px; 
+  opacity: 0;
+  z-index: 102;
+  
+  /* FIXED: Replaced "90%" with "1100" (pixels). 
+     This creates the loop and swoops to the right side of the screen. */
+  offset-path: path("M 50,50 C -50,150 50,300 150,200 S 800,400 1100,80");
+  
+  /* The fly animation */
+  animation: fly 5s infinite linear;
+}
+
+/* Keyframes - No changes needed here, but kept for context */
 @keyframes fly {
-  0% { offset-distance: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
+  0% { offset-distance: 0%; opacity: 0; transform: scale(0.5); }
+  10% { opacity: 1; transform: scale(1); }
+  85% { opacity: 1; transform: scale(1); }
+  95% { opacity: 0; transform: scale(1.5); }
   100% { offset-distance: 100%; opacity: 0; }
 }
 
-/* Firework Particles */
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 101;
+/* --- 3. Mobile Specific Path --- */
+@media (max-width: 768px) {
+  .paper-plane {
+    /* FIXED: Replaced "90%" with "320".
+       Mobile screens are narrower, so 320px lands it on the right side. */
+    offset-path: path("M 20,350 C -30,250 80,250 50,380 S 200,150 320,50");
+  }
+  
+  .contact-cta-section {
+    padding: 60px 20px; 
+  }
 }
 
-@media (max-width: 600px) {
-  .text-overlay h1 {
-    font-size: 20px;
-    line-height: 1.2;
-  }
-  .contact-left h2 {
-    font-size: 32px;
-  }
-  .stat-card {
-    width: 90%; /* Stack cards nicely on mobile */
-    margin: 10px auto;
-  }
-  header {
-    height: 80vh; /* Shorter header on mobile for better focus */
-  }
+/* --- 4. The Malaysia Flag Particle --- */
+.flag-particle {
+  position: absolute;
+  font-size: 20px; /* Size of the flag emoji */
+  pointer-events: none;
+  z-index: 103;
+  user-select: none;
+  will-change: transform, opacity;
 }
 
 /* Specific fixes for mobile phones */
@@ -1353,7 +1372,7 @@
 </section>
 
 <section class="search-section">
-  <h2><i class="fas fa-graduation-cap"></i> Find Your University</h2>
+  <h2><i class="fas fa-graduation-cap"></i> Find Your Perfect Program</h2>
   <p style="margin-bottom: 20px; color: #666;">Enter a subject (e.g. "Business", "IT") to see available universities.</p>
   <div class="search-box">
     <input type="text" id="subjectInput" placeholder="What do you want to study?" class="search-bar" onkeyup="searchUniversities()">
@@ -2010,45 +2029,89 @@ function scrollToSearch() {
   }
 }
 
-function createFirework() {
+/* --- IMPROVED PLANE & FIREWORK LOGIC --- */
+
+function triggerMalaysianFirework() {
   const container = document.querySelector('.contact-cta-section');
-  if(!container) return;
+  if (!container) return;
 
-  // Firework colors
-  const colors = ['#FFCC00', '#003399', '#CC0000', '#FFFFFF'];
+  // 1. Determine the "Hit Point" (Where the plane ends)
+  // We calculate this based on the container size to ensure it hits the "images" area.
+  const width = container.offsetWidth;
+  const height = container.offsetHeight;
+  
+  let explosionX, explosionY;
 
-  // Center the firework inside the section regardless of screen size
-  const originX = container.offsetWidth / 2;
-  const originY = container.offsetHeight / 2;
+  if (window.innerWidth > 768) {
+    // DESKTOP HIT POINT: Top Right corner (near the 3rd image)
+    // Matches the end of the SVG path: "90%, 100" (approx coordinate)
+    explosionX = width * 0.90; 
+    explosionY = 100; // Fixed pixels from top
+  } else {
+    // MOBILE HIT POINT: Top Right corner
+    // Matches the end of the Mobile SVG path: "90%, 50"
+    explosionX = width * 0.90;
+    explosionY = 50; 
+  }
 
-  for (let i = 0; i < 20; i++) { // Reduced count for mobile performance
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    const color = colors[Math.floor(Math.random() * colors.length)];
+  // 2. Create Particles (The Malaysia Flags)
+  const particleCount = 15; // Number of flags to burst
+  
+  for (let i = 0; i < particleCount; i++) {
+    const p = document.createElement('div');
+    p.classList.add('flag-particle');
+    p.innerText = '🇲🇾'; // The Malaysia Flag Emoji
     
-    particle.style.backgroundColor = color;
-    particle.style.left = originX + 'px';
-    particle.style.top = originY + 'px';
+    // Set starting position (the explosion center)
+    p.style.left = explosionX + 'px';
+    p.style.top = explosionY + 'px';
     
-    container.appendChild(particle);
+    container.appendChild(p);
 
+    // Randomize the explosion direction
+    // Random angle (0 to 360 degrees)
     const angle = Math.random() * Math.PI * 2;
-    const velocity = Math.random() * 4 + 2;
-    const destX = Math.cos(angle) * 80;
-    const destY = Math.sin(angle) * 80;
-
-    particle.animate([
-      { transform: 'translate(0, 0)', opacity: 1 },
-      { transform: `translate(${destX}px, ${destY}px)`, opacity: 0 }
-    ], { 
-      duration: 800,
-      easing: 'ease-out'
-    }).onfinish = () => particle.remove();
+    // Random distance (burst spread)
+    const velocity = Math.random() * 80 + 40; 
+    
+    const tx = Math.cos(angle) * velocity;
+    const ty = Math.sin(angle) * velocity;
+    
+    // Animate the particle
+    p.animate([
+      { transform: 'translate(0, 0) scale(0.5)', opacity: 1 },
+      { transform: `translate(${tx}px, ${ty}px) scale(1.2) rotate(${Math.random() * 30}deg)`, opacity: 0 }
+    ], {
+      duration: 1000 + Math.random() * 500, // Random duration between 1s and 1.5s
+      easing: 'cubic-bezier(0, .9, .57, 1)', // "Pop" effect easing
+      fill: 'forwards'
+    }).onfinish = () => {
+      p.remove(); // Clean up DOM after animation
+    };
   }
 }
 
-// Trigger fireworks every 4 seconds (matches the plane animation)
-setInterval(createFirework, 4000);
+// 3. Sync Logic
+// The CSS animation is 5 seconds long.
+// We want the firework to blast exactly when the plane disappears (around 95%).
+// So we set the interval to 5000ms, and delay the burst slightly to match the end frame.
+
+function startPlaneAnimationLoop() {
+  const plane = document.querySelector('.paper-plane');
+  
+  // Initial run
+  setTimeout(() => {
+    triggerMalaysianFirework();
+  }, 4500); // Trigger at 4.5s (just before the 5s loop ends)
+
+  // Loop every 5 seconds
+  setInterval(() => {
+    triggerMalaysianFirework();
+  }, 5000);
+}
+
+// Start the loop when page loads
+document.addEventListener('DOMContentLoaded', startPlaneAnimationLoop);
 
 </script>
 <script>
@@ -2198,8 +2261,7 @@ function revealUniversities() {
     slides[currentSlide].classList.add('active');
   }
 
-  // Change image every 4 seconds
-  setInterval(nextSlide, 4000);
+
 </script>
 
 </body>
