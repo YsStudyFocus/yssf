@@ -87,23 +87,65 @@
 .menu-icon {
   position: static !important;
 }
-    .nav-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      z-index: 1000;
-    }
-    .nav-menu a {
-      display: block;
-      color: white;
-      margin-bottom: 10px;
-      text-decoration: none;
-    }
+    /* --- UPDATED MENU STYLES --- */
+.nav-menu {
+  /* Position and Layout */
+  position: absolute;
+  top: 80px; /* Pushes it just below the header bar */
+  right: 25px;
+  width: 220px;
+  
+  /* Visual Style (Glassmorphism) */
+  background: rgba(0, 20, 40, 0.95); /* Deep blue/black transparent */
+  backdrop-filter: blur(10px);       /* Blurs background behind it */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 15px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  
+  /* Animation Setup (Hidden State) */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px) scale(0.95); /* Slightly higher and smaller */
+  transform-origin: top right;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy smooth effect */
+  z-index: 2000;
+}
+
+/* The Active State (Visible) - JS will add this class */
+.nav-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Menu Links */
+.nav-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  padding: 12px 25px;
+  text-decoration: none;
+  font-size: 16px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* Hover Effect for Links */
+.nav-menu a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #FFD700; /* Gold accent */
+  color: #FFD700;
+  padding-left: 30px; /* Slight movement to the right */
+}
+
+/* Icon style inside links */
+.nav-menu a i {
+  width: 20px;
+  text-align: center;
+  color: #00BFFF; /* Light blue icons */
+}
 
     /* Header Slider Styles */
     .header-slider {
@@ -1292,11 +1334,11 @@
   
 
   <div class="nav-menu" id="navMenu">
-    <a href="#">Home</a>
-    <a href="#about">About Us</a>
-    <a href="university-requirements.html">Learn Requirements</a>
-    <a href="#contact">Contact Us</a>
-  </div>
+  <a href="#"><i class="fas fa-home"></i> Home</a>
+  <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+  <a href="university-requirements.html"><i class="fas fa-list-check"></i> Requirements</a>
+  <a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a>
+</div>
   
   <div class="header-slider">
     <img src="cityu_main.jpg" class="slide active" alt="City University">
@@ -1323,7 +1365,7 @@
     <div class="action-icon" onclick="scrollToSearch()" title="Search">
       <i class="fas fa-search"></i>
     </div>
-    <div class="action-icon menu-icon" onclick="toggleMenu()" title="Menu">
+    <div class="action-icon menu-icon" onclick="toggleMenu(event)" title="Menu">
       <i class="fas fa-bars"></i>
     </div>
 </header>
@@ -2256,6 +2298,61 @@ function revealUniversities() {
 
 setInterval(nextSlide, 4000);
 
+// --- MENU TOGGLE FUNCTIONALITY ---
+// --- FIXED MENU TOGGLE FUNCTIONALITY ---
+function toggleMenu(event) {
+  // CRITICAL FIX: Stop the click from traveling to the document listener
+  if (event) event.stopPropagation();
+
+  const menu = document.getElementById("navMenu");
+  const menuBtn = document.querySelector(".menu-icon");
+  
+  // Toggle the 'active' class
+  menu.classList.toggle("active");
+  
+  // Swap the icon
+  if (menu.classList.contains("active")) {
+    menuBtn.innerHTML = '<i class="fas fa-times"></i>'; // Change to X
+  } else {
+    menuBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Back to Bars
+  }
+}
+
+// Close menu when clicking ANYWHERE outside of it
+document.addEventListener('click', function(event) {
+  const menu = document.getElementById("navMenu");
+  const menuBtn = document.querySelector(".menu-icon");
+  
+  // Only close if the menu is actually open
+  if (menu.classList.contains("active")) {
+    // Check if the click was OUTSIDE the menu
+    // Note: We don't need to check menuBtn here because stopPropagation handled it
+    if (!menu.contains(event.target)) {
+      menu.classList.remove("active");
+      menuBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Reset icon
+    }
+  }
+});
+
+// Close menu automatically when a link inside it is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+     const menu = document.getElementById("navMenu");
+     const menuBtn = document.querySelector(".menu-icon");
+     menu.classList.remove("active");
+     menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  });
+});
+
+// Close menu automatically when a link inside it is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+     const menu = document.getElementById("navMenu");
+     const menuBtn = document.querySelector(".menu-icon");
+     menu.classList.remove("active");
+     menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  });
+});
 </script>
 
 </body>
