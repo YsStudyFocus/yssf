@@ -1289,14 +1289,7 @@
 <body>
 
    <header>
-  <div class="top-right-actions">
-    <div class="action-icon" onclick="scrollToSearch()" title="Search">
-      <i class="fas fa-search"></i>
-    </div>
-    <div class="action-icon menu-icon" onclick="toggleMenu()" title="Menu">
-      <i class="fas fa-bars"></i>
-    </div>
-  </div>
+  
 
   <div class="nav-menu" id="navMenu">
     <a href="#">Home</a>
@@ -2261,6 +2254,7 @@ function revealUniversities() {
     slides[currentSlide].classList.add('active');
   }
 
+setInterval(nextSlide, 4000);
 
 </script>
 
